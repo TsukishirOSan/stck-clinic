@@ -16,22 +16,23 @@ gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.
 # MAIN STUFF
 
 gem 'awesome_print'
-gem 'bootstrap-sass', '~> 3.1.1'
 gem 'devise'
 gem 'oink'
 gem 'puma'
 gem 'simple_form'
-
+gem 'twitter-bootstrap-rails'
 
 group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'brakeman'
   gem 'factory_girl_rails'
+  gem 'pry-nav'
   gem 'rspec-rails', '~> 3.0.0.beta'
 end
 
 group :test do
+  gem 'capybara'
   gem 'shoulda-matchers'
   gem 'simplecov', '~> 0.7.1', :require => false
 end
