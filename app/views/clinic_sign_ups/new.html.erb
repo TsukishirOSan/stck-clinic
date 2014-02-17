@@ -1,0 +1,5 @@
+<h2>Signup</h2>
+
+<%= simple_form_for(@clinic, url: clinic_sign_ups_path, html: {class: 'form-horizontal' }) do |f| %>
+<%= render :partial => 'form', locals: { f: f } %>
+<% end %>
