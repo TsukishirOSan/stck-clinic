@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.
 # MAIN STUFF
 
 gem 'awesome_print'
+gem 'devise'
 gem 'oink'
 gem 'puma'
 
