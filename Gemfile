@@ -28,6 +28,7 @@ group :development, :test do
   gem 'brakeman'
   gem 'factory_girl_rails'
   gem 'pry-nav'
+  gem 'quiet_assets'
   gem 'rspec-rails', '~> 3.0.0.beta'
 end
 
