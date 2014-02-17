@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20140217213639) do
     t.datetime "updated_at"
   end
 
-  create_table "clinics", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+  create_table "clinics", force: true do |t|
     t.string   "name"
     t.string   "street_address"
     t.string   "city"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20140217213639) do
     t.datetime "updated_at"
   end
 
-  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+  create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

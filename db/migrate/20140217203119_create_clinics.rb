@@ -1,6 +1,6 @@
 class CreateClinics < ActiveRecord::Migration
   def change
-    create_table :clinics, id: :uuid do |t|
+    create_table :clinics do |t|
       t.string :name
       t.string :street_address
       t.string :city

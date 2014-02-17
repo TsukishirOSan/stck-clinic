@@ -14,11 +14,11 @@ gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.
 
 
 # MAIN STUFF
-
 gem 'awesome_print'
 gem 'devise'
 gem 'oink'
 gem 'puma'
+gem 'rails_admin'
 gem 'simple_form'
 gem 'twitter-bootstrap-rails'
 
