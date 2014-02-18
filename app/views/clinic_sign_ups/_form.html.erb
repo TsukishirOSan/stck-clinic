@@ -12,6 +12,9 @@
 <%= f.input :contact_email %>
 
 <h3>Contact Population Characteristics</h3>
-<%= f.input :panda %>
+<% [:college_health, :community_health, :family_planning, :other, :planned_parenthood, :private_practice, :std].each do |attr| %>
+  <%= f.input attr, as: :boolean %>
+<% end  %>
+
 
 <%= f.button :submit %>
