@@ -1,5 +1,18 @@
 <h2>Signup</h2>
 
-<%= simple_form_for(@clinic, url: clinic_sign_ups_path, html: {class: 'form-horizontal' }) do |f| %>
-<%= render :partial => 'form', locals: { f: f } %>
+<%= simple_form_for(@clinic_sign_up_interaction, url: clinic_sign_ups_path, html: {class: 'form-horizontal' }) do |f| %>
+  <% if @clinic_sign_up_interaction.errors.any? %>
+    <div class="alert alert-danger">
+      <p>
+        <%= pluralize(@clinic_sign_up_interaction.errors.count, "error") %>
+        prohibited this form from being saved:
+      </p>
+      <ul>
+        <% @clinic_sign_up_interaction.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= render :partial => 'form', locals: { f: f } %>
 <% end %>
