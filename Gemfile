@@ -30,11 +30,13 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-nav'
   gem 'quiet_assets'
+  gem 'rails-erd'
   gem 'rspec-rails', '~> 3.0.0.beta'
 end
 
 group :test do
   gem 'capybara'
+  gem 'launchy'
   gem 'shoulda-matchers'
   gem 'simplecov', '~> 0.7.1', :require => false
 end
