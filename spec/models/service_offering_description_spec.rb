@@ -26,7 +26,7 @@ describe ServiceOfferingDescription do
           ].each do |attr|
             service_offering_description.public_send("#{attr}=", false)
           end
-          
+
           expect(service_offering_description).not_to be_valid
         end
       end

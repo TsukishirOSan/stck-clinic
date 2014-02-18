@@ -15,9 +15,20 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
   validates :contact_phone, presence: true
   validates :contact_email, presence: true
 
+  boolean :college_health,
+          :community_health,
+          :family_planning,
+          :other,
+          :planned_parenthood,
+          :private_practice,
+          :std
+
+  validate :ensure_some_service_offered
+
   def execute
     clinic = create_clinic
     create_contact(clinic)
+    #create_service_offering_description(clinic)
   end
 
   def create_contact(clinic)
@@ -51,4 +62,19 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
       { output_name => inputs[input_name] }
     end.reduce(&:merge)
   end
+
+  def ensure_some_service_offered
+    if [college_health,
+        community_health,
+        family_planning,
+        other,
+        planned_parenthood,
+        private_practice,
+        std].any?
+      true
+    else
+      self.errors.add(:base, "you must specify some service!")
+    end
+  end
+
 end
