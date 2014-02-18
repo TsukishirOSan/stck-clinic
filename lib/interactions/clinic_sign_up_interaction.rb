@@ -9,22 +9,44 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
   validates :clinic_city, presence: true
   validates :clinic_zip, presence: true
 
+  string :contact_name, :contact_phone, :contact_email, :contact_title
+
+  validates :contact_name, presence: true
+  validates :contact_phone, presence: true
+  validates :contact_email, presence: true
+
   def execute
-    create_clinic
+    clinic = create_clinic
+    create_contact(clinic)
+  end
+
+  def create_contact(clinic)
+    attrs = map_attrs({
+                        :contact_email => :email,
+                        :contact_name => :name,
+                        :contact_phone => :phone,
+                        :contact_title => :title,
+                      }).merge(clinic: clinic)
+
+    Contact.create!(attrs)
   end
 
   def create_clinic
-    attrs = {
-      :clinic_city                     => :city,
-      :clinic_name                     => :name,
-      :clinic_state                    => :state,
-      :clinic_street_address           => :street_address,
-      :clinic_street_address_continued => :street_address_continued,
-      :clinic_zip                      => :zip,
-    }.map do |input_name, output_name|
-      { output_name => inputs[input_name] }
-    end.reduce(&:merge)
+    attrs = map_attrs({
+                        :clinic_city                     => :city,
+                        :clinic_name                     => :name,
+                        :clinic_state                    => :state,
+                        :clinic_street_address           => :street_address,
+                        :clinic_street_address_continued => :street_address_continued,
+                        :clinic_zip                      => :zip,
+                      })
 
     Clinic.create!(attrs)
+  end
+
+  def map_attrs(hsh)
+    hsh.map do |input_name, output_name|
+      { output_name => inputs[input_name] }
+    end.reduce(&:merge)
   end
 end
