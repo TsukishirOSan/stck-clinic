@@ -7,4 +7,5 @@ class Clinic < ActiveRecord::Base
   validates :zip, presence: true
 
   has_one :contact
+  has_one :service_offering_description
 end
