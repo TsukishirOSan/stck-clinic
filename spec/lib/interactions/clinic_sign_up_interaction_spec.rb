@@ -79,7 +79,7 @@ describe ClinicSignUpInteraction do
   end
 
   describe '#run' do
-    context 'clinic' do
+    context 'Clinic' do
       it 'creates one' do
         expect {
           clinic_sign_up_interaction
@@ -87,11 +87,19 @@ describe ClinicSignUpInteraction do
       end
     end
 
-    context 'contact' do
+    context 'Contact' do
       it 'creates one' do
         expect {
           clinic_sign_up_interaction
         }.to change(Contact, :count).by(1)
+      end
+    end
+
+    context 'ServiceOfferingDescription' do
+      it 'creates one' do
+        expect {
+          clinic_sign_up_interaction
+        }.to change(ServiceOfferingDescription, :count).by(1)
       end
     end
   end

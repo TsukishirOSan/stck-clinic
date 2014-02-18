@@ -28,7 +28,23 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
   def execute
     clinic = create_clinic
     create_contact(clinic)
-    #create_service_offering_description(clinic)
+    create_service_offering_description(clinic)
+  end
+
+  def create_service_offering_description(clinic)
+    attrs = map_attrs({
+                        :college_health => :college_health,
+                        :community_health => :community_health,
+                        :family_planning => :family_planning,
+                        :other => :other,
+                        :planned_parenthood => :planned_parenthood,
+                        :private_practice => :private_practice,
+                        :std => :std
+                      })
+            .merge(clinic: clinic,
+                   name: "#{ServiceOfferingDescription.model_name.human} for #{Clinic.model_name.human}")
+    Rails.logger.info("Attempting to create #{ServiceOfferingDescription.model_name.human}")
+    ServiceOfferingDescription.create!(attrs)
   end
 
   def create_contact(clinic)

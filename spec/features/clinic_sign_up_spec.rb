@@ -10,11 +10,12 @@ describe 'Clinic sign up', type: :feature do
     let(:clinic) { FactoryGirl.build(:clinic) }
     let(:contact) { FactoryGirl.build(:contact) }
 
-    before(:each) do
-      fill_in 'Clinic name', :with => clinic.name
-    end
-
     context 'given required information' do
+      before(:each) do
+        pending
+        fill_in 'Clinic name', :with => clinic.name
+      end
+
       it 'submits successfully' do
         pending "unspecified behavior"
         click_on 'Create Clinic'
