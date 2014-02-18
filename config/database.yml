@@ -51,6 +51,4 @@ production:
   adapter: postgresql
   encoding: unicode
   database: stck-clinic_production
-  pool: 5
-  username: stck-clinic
-  password:
+  host: localhost
