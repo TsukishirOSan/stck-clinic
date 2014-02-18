@@ -28,6 +28,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
                         :contact_title => :title,
                       }).merge(clinic: clinic)
 
+    Rails.logger.info("Attempting to create #{Contact.model_name.human}")
     Contact.create!(attrs)
   end
 
@@ -41,6 +42,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
                         :clinic_zip                      => :zip,
                       })
 
+    Rails.logger.info("Attempting to create #{Clinic.model_name.human}")
     Clinic.create!(attrs)
   end
 
