@@ -26,6 +26,6 @@ module StckClinic
     # config.i18n.default_locale = :de
 
     # extra autoloads
-    config.autoload_paths += Dir[Rails.root.join('lib', '{**/}')]
+    #config.autoload_paths += Dir[Rails.root.join('lib', '{**/}')]
   end
 end
