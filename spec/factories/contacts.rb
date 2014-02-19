@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: contacts
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  title      :string(255)
+#  phone      :string(255)
+#  email      :string(255)
+#  notes      :text
+#  clinic_id  :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
