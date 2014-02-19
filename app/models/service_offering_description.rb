@@ -24,7 +24,6 @@ class ServiceOfferingDescription < ActiveRecord::Base
 
   validate :ensure_some_service_offered
 
-
   def ensure_some_service_offered
     if [college_health,
         community_health,
