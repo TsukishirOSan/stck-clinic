@@ -24,4 +24,5 @@ class Clinic < ActiveRecord::Base
 
   has_one :contact
   has_one :service_offering_description
+  has_one :population_breakdowns
 end
