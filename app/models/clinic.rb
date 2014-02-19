@@ -23,6 +23,6 @@ class Clinic < ActiveRecord::Base
   validates :zip, presence: true
 
   has_one :contact
+  has_one :population_breakdown
   has_one :service_offering_description
-  has_one :population_breakdowns
 end

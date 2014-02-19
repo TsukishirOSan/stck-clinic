@@ -21,6 +21,7 @@ require 'spec_helper'
 describe ServiceOfferingDescription do
   let(:service_offering_description) { FactoryGirl.build(:service_offering_description) }
   it { should validate_presence_of(:name) }
+  it { should belong_to(:clinic) }
   it { should validate_presence_of(:clinic) }
 
   describe '#valid?' do

@@ -18,6 +18,10 @@ require 'spec_helper'
 
 describe Clinic do
   it { should validate_presence_of(:name) }
+  # associations
+  it { should have_one(:contact) }
+  it { should have_one(:population_breakdown) }
+  it { should have_one(:service_offering_description) }
   # basic info
   it { should validate_presence_of(:city) }
   it { should validate_presence_of(:state) }

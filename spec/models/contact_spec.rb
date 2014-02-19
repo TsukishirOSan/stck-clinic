@@ -17,11 +17,12 @@ require 'spec_helper'
 
 describe Contact do
   # contact info
+  it { should belong_to(:clinic) }
+  it { should validate_presence_of :clinic }
 
   it { should validate_presence_of :email }
   it { should validate_presence_of :name }
   it { should validate_presence_of :phone }
-  it { should validate_presence_of :clinic }
 
   describe '#valid?' do
     context 'given valid attributes' do
