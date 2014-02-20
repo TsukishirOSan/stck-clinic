@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: population_breakdowns
+#
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  women      :float
+#  msm        :float
+#  under_26   :float
+#  black      :float
+#  hispanic   :float
+#  clinic_id  :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'spec_helper'
 
 describe PopulationBreakdown do
