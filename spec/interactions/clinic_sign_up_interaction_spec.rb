@@ -2,8 +2,10 @@ require 'spec_helper'
 
 describe ClinicSignUpInteraction do
   let(:clinic) { FactoryGirl.build(:clinic) }
+
   let(:contact) { FactoryGirl.build(:contact, clinic: clinic) }
   let(:service_offering_description) { FactoryGirl.build(:service_offering_description, clinic: clinic) }
+  let(:population_breakdown) { FactoryGirl.build(:population_breakdown, clinic: clinic) }
 
   let(:clinic_sign_up_interaction_attributes) do
     {
@@ -26,6 +28,12 @@ describe ClinicSignUpInteraction do
       :private_practice                => service_offering_description.private_practice,
       :std                             => service_offering_description.std,
       :other                           => service_offering_description.other,
+      # population breakdown info
+      :population_women                => population_breakdown.women,
+      :population_msm                  => population_breakdown.msm,
+      :population_under_26             => population_breakdown.under_26,
+      :population_black                => population_breakdown.black,
+      :population_hispanic             => population_breakdown.hispanic,
     }
   end
 
@@ -100,6 +108,14 @@ describe ClinicSignUpInteraction do
         expect {
           clinic_sign_up_interaction
         }.to change(ServiceOfferingDescription, :count).by(1)
+      end
+    end
+
+    context 'PopulationBreakdown' do
+      it 'creates one' do
+        expect {
+          clinic_sign_up_interaction
+        }.to change(PopulationBreakdown, :count).by(1)
       end
     end
   end

@@ -25,10 +25,31 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
 
   validate :ensure_some_service_offered
 
+  float :population_women,
+          :population_msm,
+          :population_under_26,
+          :population_hispanic,
+          :population_black
+
   def execute
     clinic = create_clinic
     create_contact(clinic)
     create_service_offering_description(clinic)
+    create_population_breakdown(clinic)
+  end
+
+  def create_population_breakdown(clinic)
+    attrs = map_attrs({
+                        :population_black    => :black,
+                        :population_hispanic => :hispanic,
+                        :population_msm      => :msm,
+                        :population_under_26 => :under_26,
+                        :population_women    => :women,
+                      }).merge(clinic: clinic,
+                               name: "#{PopulationBreakdown.model_name.human} for #{Clinic.model_name.human} #{clinic.name}")
+
+    Rails.logger.info("Attempting to create #{PopulationBreakdown.model_name.human}")
+    PopulationBreakdown.create!(attrs)
   end
 
   def create_service_offering_description(clinic)
@@ -42,7 +63,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
                         :std => :std
                       })
             .merge(clinic: clinic,
-                   name: "#{ServiceOfferingDescription.model_name.human} for #{Clinic.model_name.human}")
+                   name: "#{ServiceOfferingDescription.model_name.human} for #{Clinic.model_name.human} #{clinic.name}")
     Rails.logger.info("Attempting to create #{ServiceOfferingDescription.model_name.human}")
     ServiceOfferingDescription.create!(attrs)
   end
@@ -73,9 +94,9 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
     Clinic.create!(attrs)
   end
 
-  def map_attrs(hsh)
+  def map_attrs(hsh, default = nil)
     hsh.map do |input_name, output_name|
-      { output_name => inputs[input_name] }
+      { output_name => inputs.fetch(input_name, default) }
     end.reduce(&:merge)
   end
 
