@@ -26,16 +26,22 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
   validate :ensure_some_service_offered
 
   float :population_women,
-          :population_msm,
-          :population_under_26,
-          :population_hispanic,
-          :population_black
+        :population_msm,
+        :population_under_26,
+        :population_hispanic,
+        :population_black
+
+  float :test_ct,    :diag_ct,
+        :test_gc,    :diag_gc,
+        :test_trich, :diag_trich,
+        :test_hiv,   :diag_hiv
 
   def execute
     clinic = create_clinic
     create_contact(clinic)
     create_service_offering_description(clinic)
     create_population_breakdown(clinic)
+    create_epi_breakdown(clinic)
   end
 
   def create_population_breakdown(clinic)
@@ -50,6 +56,23 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
 
     Rails.logger.info("Attempting to create #{PopulationBreakdown.model_name.human}")
     PopulationBreakdown.create!(attrs)
+  end
+
+  def create_epi_breakdown(clinic)
+    attrs = map_attrs({
+                        :test_ct    => :test_ct,
+                        :diag_ct    => :diag_ct,
+                        :test_gc    => :test_gc,
+                        :diag_gc    => :diag_gc,
+                        :test_trich => :test_trich,
+                        :diag_trich => :diag_trich,
+                        :test_hiv   => :test_hiv,
+                        :diag_hiv   => :diag_hiv
+                      })
+            .merge(clinic: clinic,
+                   name: "#{EpiBreakdown.model_name.human} for #{Clinic.model_name.human} #{clinic.name}")
+    Rails.logger.info("Attempting to create #{EpiBreakdown.model_name.human}")
+    EpiBreakdown.create!(attrs)
   end
 
   def create_service_offering_description(clinic)

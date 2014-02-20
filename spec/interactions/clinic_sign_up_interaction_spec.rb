@@ -6,6 +6,7 @@ describe ClinicSignUpInteraction do
   let(:contact) { FactoryGirl.build(:contact, clinic: clinic) }
   let(:service_offering_description) { FactoryGirl.build(:service_offering_description, clinic: clinic) }
   let(:population_breakdown) { FactoryGirl.build(:population_breakdown, clinic: clinic) }
+  let(:epi_breakdown) { FactoryGirl.build(:epi_breakdown, clinic: clinic) }
 
   let(:clinic_sign_up_interaction_attributes) do
     {
@@ -34,6 +35,15 @@ describe ClinicSignUpInteraction do
       :population_under_26             => population_breakdown.under_26,
       :population_black                => population_breakdown.black,
       :population_hispanic             => population_breakdown.hispanic,
+      # epi breakdown (testing and diagnoses)
+      :test_ct                         => epi_breakdown.test_ct,
+      :diag_ct                         => epi_breakdown.diag_ct,
+      :test_gc                         => epi_breakdown.test_gc,
+      :diag_gc                         => epi_breakdown.diag_gc,
+      :test_trich                      => epi_breakdown.test_trich,
+      :diag_trich                      => epi_breakdown.diag_trich,
+      :test_hiv                        => epi_breakdown.test_hiv,
+      :diag_hiv                        => epi_breakdown.diag_hiv,
     }
   end
 
@@ -116,6 +126,14 @@ describe ClinicSignUpInteraction do
         expect {
           clinic_sign_up_interaction
         }.to change(PopulationBreakdown, :count).by(1)
+      end
+    end
+
+    context 'EpiBreakdown' do
+      it 'creates one' do
+        expect {
+          clinic_sign_up_interaction
+        }.to change(EpiBreakdown, :count).by(1)
       end
     end
   end
