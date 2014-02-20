@@ -5,5 +5,7 @@ Mostly-internal app for care facilities involved with
 
 [![Build Status](https://travis-ci.org/SexualHealthInnovations/stck-clinic.png?branch=master)](https://travis-ci.org/SexualHealthInnovations/stck-clinic)
 
+[![Code Climate](https://codeclimate.com/github/SexualHealthInnovations/stck-clinic.png)](https://codeclimate.com/github/SexualHealthInnovations/stck-clinic)
+
 Copyleft 2014 Sexual Health Innovations
 http://sexualhealthinnovations.org
