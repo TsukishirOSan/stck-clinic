@@ -11,7 +11,7 @@ Mostly-internal app for care facilities involved with
 
 This should help you get up and running to develop on this project:
 
-### Requirements ### 
+### Requirements ###
 * [PostgreSQL](http://www.postgresql.org/)
 * http://ruby-lang.org 2.0.0 / 2.1.0 (ideally [RVM](http://rvm.io))
 * Git
@@ -29,6 +29,10 @@ Pull requests welcome! Please make sure you've got rspec coverage for
 your contributions (this includes feature specs for frontend
 stuff!). SimpleCov reports generated in the `coverage` folder will
 help you make sure you've got adequate spec coverage.
+
+### Other ideas ###
+
+Provide a Vagrant config to ease development.
 
 Copyleft 2014 Sexual Health Innovations
 http://sexualhealthinnovations.org
