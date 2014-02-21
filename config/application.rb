@@ -27,5 +27,6 @@ module StckClinic
 
     # extra autoloads
     #config.autoload_paths += Dir[Rails.root.join('lib', '{**/}')]
+    config.i18n.enforce_available_locales = true
   end
 end
