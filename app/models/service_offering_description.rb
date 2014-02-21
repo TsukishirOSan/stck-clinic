@@ -24,6 +24,12 @@ class ServiceOfferingDescription < ActiveRecord::Base
 
   validate :ensure_some_service_offered
 
+  CHARGE_CT_OPTIONS = ["Free", "Depends on the insurance", "Sliding scale", "Flat fee", "Other"]
+  validates :charge_ct, inclusion: {in: CHARGE_CT_OPTIONS}, allow_nil: true
+
+  NOTIFY_TEST_READY_OPTIONS = ["No", "Yes, for people who are positive", "Yes, for all patients", "Other"]
+  validates :notify_test_ready, inclusion: {in: NOTIFY_TEST_READY_OPTIONS}, allow_nil: true
+
   def ensure_some_service_offered
     if [college_health,
         community_health,

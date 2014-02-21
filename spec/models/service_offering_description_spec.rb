@@ -49,6 +49,10 @@ describe ServiceOfferingDescription do
           expect(service_offering_description).not_to be_valid
         end
       end
+
+      it { should ensure_inclusion_of(:charge_ct).in_array(ServiceOfferingDescription::CHARGE_CT_OPTIONS) }
+      it { should ensure_inclusion_of(:notify_test_ready).in_array(ServiceOfferingDescription::NOTIFY_TEST_READY_OPTIONS) }
+
     end
   end
 end
