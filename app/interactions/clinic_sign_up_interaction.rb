@@ -51,8 +51,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
                         :population_msm      => :msm,
                         :population_under_26 => :under_26,
                         :population_women    => :women,
-                      }).merge(clinic: clinic,
-                               name: "#{PopulationBreakdown.model_name.human} for #{Clinic.model_name.human} #{clinic.name}")
+                      }, clinic, PopulationBreakdown)
 
     Rails.logger.info("Attempting to create #{PopulationBreakdown.model_name.human}")
     PopulationBreakdown.create!(attrs)
@@ -68,9 +67,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
                         :diag_trich => :diag_trich,
                         :test_hiv   => :test_hiv,
                         :diag_hiv   => :diag_hiv
-                      })
-            .merge(clinic: clinic,
-                   name: "#{EpiBreakdown.model_name.human} for #{Clinic.model_name.human} #{clinic.name}")
+                      }, clinic, EpiBreakdown)
     Rails.logger.info("Attempting to create #{EpiBreakdown.model_name.human}")
     EpiBreakdown.create!(attrs)
   end
@@ -84,9 +81,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
                         :planned_parenthood => :planned_parenthood,
                         :private_practice => :private_practice,
                         :std => :std
-                      })
-            .merge(clinic: clinic,
-                   name: "#{ServiceOfferingDescription.model_name.human} for #{Clinic.model_name.human} #{clinic.name}")
+                      }, clinic, ServiceOfferingDescription)
     Rails.logger.info("Attempting to create #{ServiceOfferingDescription.model_name.human}")
     ServiceOfferingDescription.create!(attrs)
   end
@@ -97,7 +92,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
                         :contact_name => :name,
                         :contact_phone => :phone,
                         :contact_title => :title,
-                      }).merge(clinic: clinic)
+                      }, clinic).merge(clinic: clinic)
 
     Rails.logger.info("Attempting to create #{Contact.model_name.human}")
     Contact.create!(attrs)
@@ -117,10 +112,24 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
     Clinic.create!(attrs)
   end
 
-  def map_attrs(hsh, default = nil)
-    hsh.map do |input_name, output_name|
+  def map_attrs(hsh, clinic = nil, klass = nil, default = nil)
+    output = hsh.map do |input_name, output_name|
       { output_name => inputs.fetch(input_name, default) }
     end.reduce(&:merge)
+
+    if klass.present?
+      output = {
+        name: "#{klass.model_name.human} for #{Clinic.model_name.human} #{clinic.name}"
+      }.merge(output)
+    end
+
+    if clinic.present?
+      output = {
+        clinic: clinic
+      }.merge(output)
+    end
+
+    output
   end
 
   def ensure_some_service_offered
