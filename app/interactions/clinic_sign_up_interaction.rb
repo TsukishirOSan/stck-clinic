@@ -23,6 +23,14 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
           :private_practice,
           :std
 
+  string :charge_ct, :notify_test_ready
+
+  boolean :deliver_results_online,
+          :deliver_results_in_person,
+          :deliver_results_on_phone_human,
+          :deliver_results_on_phone_automated,
+          :deliver_results_other
+
   validate :ensure_some_service_offered
 
   float :population_women,

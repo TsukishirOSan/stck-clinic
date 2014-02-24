@@ -37,6 +37,14 @@ class ServiceOfferingDescription < ActiveRecord::Base
   NOTIFY_TEST_READY_OPTIONS = ["No", "Yes, for people who are positive", "Yes, for all patients", "Other"]
   validates :notify_test_ready, inclusion: {in: NOTIFY_TEST_READY_OPTIONS}, allow_nil: true
 
+  def charge_ct_enum
+    CHARGE_CT_OPTIONS
+  end
+
+  def notify_test_ready_enum
+    NOTIFY_TEST_READY_OPTIONS
+  end
+
   def ensure_some_service_offered
     if [college_health,
         community_health,

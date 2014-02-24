@@ -62,4 +62,20 @@ describe ServiceOfferingDescription do
 
     end
   end
+
+  describe 'RailsAdmin Enumerations' do
+    describe '#charge_ct_enum' do
+      it 'returns options' do
+        expect(service_offering_description.charge_ct_enum)
+          .to eq(ServiceOfferingDescription::CHARGE_CT_OPTIONS)
+      end
+    end
+
+    describe '#notify_test_ready_enum' do
+      it 'returns options' do
+        expect(service_offering_description.notify_test_ready_enum)
+          .to eq(ServiceOfferingDescription::NOTIFY_TEST_READY_OPTIONS)
+      end
+    end
+  end
 end

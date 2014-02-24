@@ -37,6 +37,15 @@ FactoryGirl.define do
     std true
     other false
 
+    charge_ct { ServiceOfferingDescription::CHARGE_CT_OPTIONS.first }
+    notify_test_ready { ServiceOfferingDescription::NOTIFY_TEST_READY_OPTIONS.first }
+
+    deliver_results_in_person true
+    deliver_results_on_phone_automated true
+    deliver_results_on_phone_human true
+    deliver_results_online true
+    deliver_results_other true
+
     clinic
   end
 end
