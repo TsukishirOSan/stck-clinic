@@ -1,7 +1,6 @@
 script: "bundle exec rake spec"
 language: ruby
 rvm:
-  - 2.0.0
   - 2.1.0
 #before_script:
 #  - psql -c 'create database "stck-clinic_test";' -U postgres
