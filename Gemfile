@@ -30,6 +30,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'brakeman'
   gem 'factory_girl_rails'
+  gem 'guard-rspec', require: false
   gem 'oink'
   gem 'pry-nav'
   gem 'quiet_assets'
