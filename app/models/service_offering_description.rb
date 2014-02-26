@@ -29,7 +29,7 @@ class ServiceOfferingDescription < ActiveRecord::Base
   validates :name, presence: true
   validates :clinic, presence: true
 
-  validate :ensure_some_service_offered
+  include EnsureOneService
 
   CHARGE_CT_OPTIONS = ["Free", "Depends on the insurance", "Sliding scale", "Flat fee", "Other"]
   validates :charge_ct, inclusion: {in: CHARGE_CT_OPTIONS}, allow_nil: true
@@ -43,19 +43,5 @@ class ServiceOfferingDescription < ActiveRecord::Base
 
   def notify_test_ready_enum
     NOTIFY_TEST_READY_OPTIONS
-  end
-
-  def ensure_some_service_offered
-    if [college_health,
-        community_health,
-        family_planning,
-        other,
-        planned_parenthood,
-        private_practice,
-        std].any?
-      true
-    else
-      self.errors.add(:base, "you must specify some service!")
-    end
   end
 end

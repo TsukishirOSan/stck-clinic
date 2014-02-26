@@ -31,7 +31,8 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
           :deliver_results_on_phone_automated,
           :deliver_results_other
 
-  validate :ensure_some_service_offered
+  #validate :ensure_some_service_offered
+  include EnsureOneService
 
   float :population_women,
         :population_msm,
@@ -138,20 +139,6 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
     end
 
     output
-  end
-
-  def ensure_some_service_offered
-    if [college_health,
-        community_health,
-        family_planning,
-        other,
-        planned_parenthood,
-        private_practice,
-        std].any?
-      true
-    else
-      self.errors.add(:base, "you must specify some service!")
-    end
   end
 
 end
