@@ -74,6 +74,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    contracts (0.3)
     debug_inspector (0.0.2)
     devise (3.2.3)
       bcrypt-ruby (~> 3.0)
@@ -301,6 +302,7 @@ DEPENDENCIES
   binding_of_caller
   brakeman
   capybara
+  contracts
   devise
   factory_girl_rails
   guard-rspec

@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 1.2' # Build JSON APIs with ease. Read more: https://github.
 # MAIN STUFF
 gem 'active_interaction'
 gem 'awesome_print'
+gem 'contracts'
 gem 'devise'
 gem 'puma'
 gem 'rails_admin'

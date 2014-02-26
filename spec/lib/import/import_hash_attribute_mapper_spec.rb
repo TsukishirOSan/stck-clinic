@@ -45,9 +45,31 @@ describe ImportHashAttributeMapper do
     subject { mapped_attribute_hash }
 
     ImportHashAttributeMapper::ATTRIBUTE_MAP_TABLE.each do |src, dest|
-      # both needed to ensure nil values get set explicitly
+      # both needed to ensure nil values get set explicitly!
       it { should have_key(dest) }
       it { expect(mapped_attribute_hash[dest]).to eq(import_hash[src]) }
+    end
+  end
+
+  describe '#value_to_float' do
+    context 'given "- " (notice the space)' do
+      it { expect(import_hash_attribute_mapper.value_to_float '- ').to eq(0.0) }
+    end
+
+    context 'given nil' do
+      it { expect(import_hash_attribute_mapper.value_to_float nil).to eq(0.0) }
+    end
+
+    context 'given a stringified float' do
+      it { expect(import_hash_attribute_mapper.value_to_float '6.13').to eq(6.13) }
+    end
+
+    context 'given an actual float' do
+      it { expect(import_hash_attribute_mapper.value_to_float 69.0).to eq(69) }
+    end
+
+    context 'given an int' do
+      it { expect(import_hash_attribute_mapper.value_to_float 69).to eq(69) }
     end
   end
 end
