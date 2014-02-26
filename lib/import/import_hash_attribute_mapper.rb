@@ -24,7 +24,15 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     "What percent of your clients are men who have sex with men (MSM)?" => :population_msm,
     "What percent of your clients are under 26?" => :population_under_26,
     "What percent of your clients are black/African American?" => :population_black,
-    "What percent of your clients are hispanic/Latino(a)?" => :population_hispanic
+    "What percent of your clients are hispanic/Latino(a)?" => :population_hispanic,
+    "How many people did you test last year for chlamydia?" => :test_ct,
+    "How many did you diagnose with chlamydia?" => :diag_ct,
+    "How many did you test for gonorrhea?" => :test_gc,
+    "How many did you diagnose with gonorrhea?" => :diag_gc,
+    "How many did you test for trichomoniasis?" => :test_trich,
+    "How may did you diagnose with trichomoniasis?" => :diag_trich,
+    "How many did you test for HIV?" => :test_hiv,
+    "How many did you diagnose with HIV?" => :diag_hiv,
   }
 
   def mapped_attribute_hash
