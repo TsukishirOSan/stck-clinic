@@ -21,7 +21,7 @@ describe ImportHashAttributeMapper do
       "What percent of your clients are women?" => "45",
       "What percent of your clients are men who have sex with men (MSM)?" => "5",
       "What percent of your clients are under 26?" => "60",
-      "What percent of your clients are black/African American?" => "70",
+      "What percent of your clients are black/African American?" => " - ",
       "What percent of your clients are hispanic/Latino(a)?" => "25",
       "How many people did you test last year for chlamydia?" => "1900",
       "How many did you test for gonorrhea?" => "1100",
@@ -40,14 +40,26 @@ describe ImportHashAttributeMapper do
 
   let(:import_hash_attribute_mapper) { ImportHashAttributeMapper.new(import_hash) }
 
-  describe '#mapped_attribute_hash' do
-    let(:mapped_attribute_hash) { import_hash_attribute_mapper.mapped_attribute_hash }
+  describe '#mapped_direct_attribute_hash' do
+    let(:mapped_attribute_hash) { import_hash_attribute_mapper.mapped_direct_attribute_hash }
     subject { mapped_attribute_hash }
 
-    ImportHashAttributeMapper::ATTRIBUTE_MAP_TABLE.each do |src, dest|
+    ImportHashAttributeMapper::DIRECT_ATTRIBUTE_MAP_TABLE.each do |src, dest|
       # both needed to ensure nil values get set explicitly!
       it { should have_key(dest) }
       it { expect(mapped_attribute_hash[dest]).to eq(import_hash[src]) }
+    end
+  end
+
+  describe '#mapped_numeric_attribute_hash' do
+    let(:mapped_attribute_hash) { import_hash_attribute_mapper.mapped_numeric_attribute_hash }
+    subject { mapped_attribute_hash }
+
+    ImportHashAttributeMapper::NUMERIC_ATTRIBUTE_MAP_TABLE.each do |src,dest|
+      context "#{src} -> #{dest} " do
+        it { should have_key(dest) }
+        it { expect(mapped_attribute_hash[dest]).to eq(import_hash_attribute_mapper.value_to_float import_hash[src]) }
+      end
     end
   end
 

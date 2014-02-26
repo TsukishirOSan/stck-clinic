@@ -1,7 +1,7 @@
 class ImportHashAttributeMapper < Struct.new(:import_hash)
   include Contracts
 
-  ATTRIBUTE_MAP_TABLE = {
+  DIRECT_ATTRIBUTE_MAP_TABLE = {
     # Clinic info
     "Clinic name" => :clinic_name,
     "Address line 1" => :clinic_street_address,
@@ -19,17 +19,34 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     "How much do you charge clients for a chlamydia test?" => :charge_ct
   }
 
+  NUMERIC_ATTRIBUTE_MAP_TABLE = {
+    "What percent of your clients are women?" => :population_women,
+    "What percent of your clients are men who have sex with men (MSM)?" => :population_msm,
+    "What percent of your clients are under 26?" => :population_under_26,
+    "What percent of your clients are black/African American?" => :population_black,
+    "What percent of your clients are hispanic/Latino(a)?" => :population_hispanic
+  }
+
   def mapped_attribute_hash
-    attribute_hash_mapped_by_table
+    [
+      mapped_direct_attribute_hash,
+      mapped_numeric_attribute_hash
+    ].reduce(&:merge)
   end
 
-  def attribute_hash_mapped_by_table
-    pairs = ATTRIBUTE_MAP_TABLE.map do |src, dest|
-      Rails.logger.tagged("ImportHashAttributeMapper") do
-        Rails.logger.info("Mapping '#{src}' -> '#{dest}'")
-      end
-
+  def mapped_direct_attribute_hash
+    pairs = DIRECT_ATTRIBUTE_MAP_TABLE.map do |src, dest|
+      Rails.logger.info("Mapping directly '#{src}' -> '#{dest}'")
       [dest, import_hash[src]]
+    end
+
+    Hash[pairs]
+  end
+
+  def mapped_numeric_attribute_hash
+    pairs = NUMERIC_ATTRIBUTE_MAP_TABLE.map do |src, dest|
+      Rails.logger.info("Mapping numeric '#{src}' -> '#{dest}'")
+      [ dest, value_to_float(import_hash[src]) ]
     end
 
     Hash[pairs]
