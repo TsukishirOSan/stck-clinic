@@ -8,7 +8,7 @@ RUN apt-get upgrade -y
 RUN apt-get install -y apt-utils
 
 # install build tools
-RUN apt-get install -y build-essential git curl zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev ncurses-dev libdb-dev libreadline-dev procps postgresql-client libpq-dev gawk libtool
+RUN apt-get install -y build-essential git curl zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev ncurses-dev libdb-dev libreadline-dev procps postgresql-client libpq-dev gawk libtool libv8-dev
 
 #install RVM and Ruby 2.1.1
 RUN \curl -sSL https://get.rvm.io | bash -s stable
@@ -17,7 +17,7 @@ RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm install 2.1.1 --fuzzy"
 RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm use 2.1.1 --default"
 
 # add Rails app and install gem dependencies
-RUN apt-get install -y libv8-dev
+RUN apt-get clean 
 ADD . /app
 WORKDIR /app
 RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle"
