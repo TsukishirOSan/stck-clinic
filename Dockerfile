@@ -17,7 +17,7 @@ RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm install 2.1.1 --fuzzy"
 RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm use 2.1.1 --default"
 
 # add Rails app and install gem dependencies
-RUN apt-get clean 
+RUN apt-get clean
 ADD . /app
 WORKDIR /app
 RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle"
