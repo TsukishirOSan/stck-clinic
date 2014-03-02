@@ -7,6 +7,8 @@ Mostly-internal app for care facilities involved with
 
 [![Code Climate](https://codeclimate.com/github/SexualHealthInnovations/stck-clinic.png)](https://codeclimate.com/github/SexualHealthInnovations/stck-clinic)
 
+[![Dependency Status](https://gemnasium.com/SexualHealthInnovations/stck-clinic.png)](https://gemnasium.com/SexualHealthInnovations/stck-clinic)
+
 ## Getting Started ##
 
 This should help you get up and running to develop on this project:
