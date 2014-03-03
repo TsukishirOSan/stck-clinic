@@ -25,6 +25,12 @@ This should help you get up and running to develop on this project:
 1. `bundle install`
 1. `rake spec`
 
+### Generate docs ###
+
+We use [Yardoc](http://yardoc.org/) for documentation so please feel
+free to generate docs by running `yard` and checking in the `doc`
+folder for output.
+
 ## Contributing ##
 
 Pull requests welcome! Please make sure you've got rspec coverage for
