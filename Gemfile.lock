@@ -60,11 +60,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    celluloid (0.15.2)
-      timers (~> 1.1.0)
-    celluloid-io (0.15.0)
-      celluloid (>= 0.15.0)
-      nio4r (>= 0.5.0)
     choice (0.1.6)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -83,6 +78,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docile (1.1.3)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.4.0)
@@ -91,19 +87,8 @@ GEM
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
     fastercsv (1.5.5)
-    ffi (1.9.3)
     font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
-    formatador (0.2.4)
-    guard (2.5.1)
-      formatador (>= 0.2.4)
-      listen (~> 2.6)
-      lumberjack (~> 1.0)
-      pry (>= 0.9.12)
-      thor (>= 0.18.1)
-    guard-rspec (4.2.2)
-      guard (~> 2.1, >= 2.1)
-      rspec (~> 3.0.0.beta, >= 2.14, < 4.0)
     haml (4.0.5)
       tilt
     highline (1.6.21)
@@ -122,12 +107,6 @@ GEM
     launchy (2.4.2)
       addressable (~> 2.3)
     libv8 (3.16.14.3)
-    listen (2.6.2)
-      celluloid (>= 0.15.2)
-      celluloid-io (>= 0.15.0)
-      rb-fsevent (>= 0.9.3)
-      rb-inotify (>= 0.9)
-    lumberjack (1.0.4)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -137,7 +116,6 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.4)
     nested_form (0.3.2)
-    nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     oink (0.10.1)
@@ -195,17 +173,10 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.1)
-    rb-fsevent (0.9.4)
-    rb-inotify (0.9.3)
-      ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
     ref (1.0.5)
     remotipart (1.2.1)
-    rspec (3.0.0.beta2)
-      rspec-core (= 3.0.0.beta2)
-      rspec-expectations (= 3.0.0.beta2)
-      rspec-mocks (= 3.0.0.beta2)
     rspec-collection_matchers (0.0.3)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.0.0.beta2)
@@ -247,10 +218,11 @@ GEM
     simple_form (3.0.1)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
-    simplecov (0.7.1)
-      multi_json (~> 1.0)
-      simplecov-html (~> 0.7.1)
-    simplecov-html (0.7.1)
+    simplecov (0.8.2)
+      docile (~> 1.1.0)
+      multi_json
+      simplecov-html (~> 0.8.0)
+    simplecov-html (0.8.0)
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
@@ -273,7 +245,6 @@ GEM
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
-    timers (1.1.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -308,7 +279,6 @@ DEPENDENCIES
   contracts
   devise
   factory_girl_rails
-  guard-rspec
   jquery-rails
   launchy
   oink
@@ -324,7 +294,7 @@ DEPENDENCIES
   sdoc
   shoulda-matchers
   simple_form
-  simplecov (~> 0.7.1)
+  simplecov (~> 0.8.2)
   therubyracer
   turbolinks
   twitter-bootstrap-rails

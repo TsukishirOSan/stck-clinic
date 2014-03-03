@@ -30,7 +30,6 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'brakeman'
   gem 'factory_girl_rails'
-  gem 'guard-rspec', require: false
   gem 'oink'
   gem 'pry-nav'
   gem 'quiet_assets'
@@ -43,7 +42,7 @@ group :test do
   gem 'capybara'
   gem 'launchy'
   gem 'shoulda-matchers'
-  gem 'simplecov', '~> 0.7.1', :require => false
+  gem 'simplecov', '~> 0.8.2', :require => false
 end
 
 group :doc, :development do
