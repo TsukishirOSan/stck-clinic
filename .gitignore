@@ -15,7 +15,7 @@
 /log/*.log
 /tmp
 /doc
-
+/.yardoc
 # Ignore actual database.yml
 config/database.yml
 

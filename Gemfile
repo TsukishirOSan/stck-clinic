@@ -37,6 +37,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'rails-erd'
   gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'yard'
 end
 
 group :test do
