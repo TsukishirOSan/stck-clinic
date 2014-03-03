@@ -16,12 +16,24 @@ RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm requirements"
 RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm install 2.1.1 --fuzzy"
 RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm use 2.1.1 --default"
 
-# add Rails app and install gem dependencies
-RUN apt-get clean
-ADD . /app
-WORKDIR /app
+# install gem dependencies (cacheable)
+RUN /usr/local/rvm/bin/rvm-shell -l -c "mkdir -p /tmp/gemstuff"
+ADD Gemfile /tmp/gemstuff/Gemfile
+ADD Gemfile.lock /tmp/gemstuff/Gemfile.lock
+ADD .ruby-version /tmp/gemstuff/.ruby-version
+ADD .ruby-gemset /tmp/gemstuff/.ruby-gemset
+WORKDIR /tmp/gemstuff
 RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle"
+
+# add Rails app
+ADD . /opt/app
+WORKDIR /opt/app
+RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle"
+
+# clean shit up
+RUN apt-get clean
+RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm cleanup all"
 
 # run app
 EXPOSE 3000 3000
-ENTRYPOINT ["/usr/local/rvm/bin/rvm-shell", "-l", "-c", "bundle exec rails server"]
+CMD ["/usr/local/rvm/bin/rvm-shell", "-l", "-c", "bundle exec rails server"]
