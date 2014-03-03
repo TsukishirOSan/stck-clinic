@@ -1,6 +1,5 @@
 # Maps hash constructed from CSV to hash suitable for passing to
 # some Clinic factory.
-
 class ImportHashAttributeMapper < Struct.new(:import_hash)
   include Contracts
 
@@ -42,7 +41,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
 
   Contract nil => Hash
   # Constructs properly-mapped attribute hash.
-  # @return [Array] mapped attribute hash with symbol keys.
+  # @return [Array<Hash {Symbol => String,Float}>] mapped attribute hash with symbol keys.
   def mapped_attribute_hash
     [
       mapped_direct_attribute_hash,
@@ -52,7 +51,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
 
   Contract nil => Hash
   # Directly maps attributes.
-  # @return [Array] directly-mapped attribute hash.
+  # @return [Array<Hash {Symbol => String,Float}>] directly-mapped attribute hash.
   def mapped_direct_attribute_hash
     pairs = DIRECT_ATTRIBUTE_MAP_TABLE.map do |src, dest|
       Rails.logger.info("Mapping directly '#{src}' -> '#{dest}'")
@@ -64,7 +63,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
 
   Contract nil => Hash
   # Processes numeric fields and maps them.
-  # @return [Array] numerically-mapped attribute hash.
+  # @return [Array<Hash {Symbol => String,Float}>] numerically-mapped attribute hash.
   def mapped_numeric_attribute_hash
     pairs = NUMERIC_ATTRIBUTE_MAP_TABLE.map do |src, dest|
       Rails.logger.info("Mapping numeric '#{src}' -> '#{dest}'")
@@ -76,6 +75,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
 
   Contract Or[String, Num, nil] => Float
   # Sensibly convert string value to float
+  # @param raw_value [String,Numeric] some column value
   # @return [Float] converted value
   def value_to_float(raw_value)
     value = raw_value.to_s.strip

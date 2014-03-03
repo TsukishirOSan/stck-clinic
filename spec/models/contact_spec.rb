@@ -2,16 +2,18 @@
 #
 # Table name: contacts
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  title      :string(255)
-#  phone      :string(255)
-#  email      :string(255)
-#  notes      :text
-#  clinic_id  :integer
-#  created_at :datetime
-#  updated_at :datetime
-#
+# *id*::         <tt>integer, not null, primary key</tt>
+# *name*::       <tt>string(255)</tt>
+# *title*::      <tt>string(255)</tt>
+# *phone*::      <tt>string(255)</tt>
+# *email*::      <tt>string(255)</tt>
+# *notes*::      <tt>text</tt>
+# *clinic_id*::  <tt>integer</tt>
+# *created_at*:: <tt>datetime</tt>
+# *updated_at*:: <tt>datetime</tt>
+#--
+# == Schema Information End
+#++
 
 require 'spec_helper'
 

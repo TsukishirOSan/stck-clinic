@@ -2,17 +2,19 @@
 #
 # Table name: population_breakdowns
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  women      :float
-#  msm        :float
-#  under_26   :float
-#  black      :float
-#  hispanic   :float
-#  clinic_id  :integer
-#  created_at :datetime
-#  updated_at :datetime
-#
+# *id*::         <tt>integer, not null, primary key</tt>
+# *name*::       <tt>string(255)</tt>
+# *women*::      <tt>float</tt>
+# *msm*::        <tt>float</tt>
+# *under_26*::   <tt>float</tt>
+# *black*::      <tt>float</tt>
+# *hispanic*::   <tt>float</tt>
+# *clinic_id*::  <tt>integer</tt>
+# *created_at*:: <tt>datetime</tt>
+# *updated_at*:: <tt>datetime</tt>
+#--
+# == Schema Information End
+#++
 
 class PopulationBreakdown < ActiveRecord::Base
   belongs_to :clinic

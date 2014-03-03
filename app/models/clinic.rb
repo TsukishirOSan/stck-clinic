@@ -2,17 +2,19 @@
 #
 # Table name: clinics
 #
-#  id                       :integer          not null, primary key
-#  name                     :string(255)
-#  street_address           :string(255)
-#  city                     :string(255)
-#  state                    :string(255)
-#  zip                      :string(255)
-#  created_at               :datetime
-#  updated_at               :datetime
-#  street_address_continued :string(255)
-#  notes                    :text
-#
+# *id*::                       <tt>integer, not null, primary key</tt>
+# *name*::                     <tt>string(255)</tt>
+# *street_address*::           <tt>string(255)</tt>
+# *city*::                     <tt>string(255)</tt>
+# *state*::                    <tt>string(255)</tt>
+# *zip*::                      <tt>string(255)</tt>
+# *created_at*::               <tt>datetime</tt>
+# *updated_at*::               <tt>datetime</tt>
+# *street_address_continued*:: <tt>string(255)</tt>
+# *notes*::                    <tt>text</tt>
+#--
+# == Schema Information End
+#++
 
 class Clinic < ActiveRecord::Base
   # basic info

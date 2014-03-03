@@ -2,20 +2,22 @@
 #
 # Table name: epi_breakdowns
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  clinic_id  :integer
-#  test_ct    :float
-#  diag_ct    :float
-#  test_gc    :float
-#  diag_gc    :float
-#  test_trich :float
-#  diag_trich :float
-#  test_hiv   :float
-#  diag_hiv   :float
-#  created_at :datetime
-#  updated_at :datetime
-#
+# *id*::         <tt>integer, not null, primary key</tt>
+# *name*::       <tt>string(255)</tt>
+# *clinic_id*::  <tt>integer</tt>
+# *test_ct*::    <tt>float</tt>
+# *diag_ct*::    <tt>float</tt>
+# *test_gc*::    <tt>float</tt>
+# *diag_gc*::    <tt>float</tt>
+# *test_trich*:: <tt>float</tt>
+# *diag_trich*:: <tt>float</tt>
+# *test_hiv*::   <tt>float</tt>
+# *diag_hiv*::   <tt>float</tt>
+# *created_at*:: <tt>datetime</tt>
+# *updated_at*:: <tt>datetime</tt>
+#--
+# == Schema Information End
+#++
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
