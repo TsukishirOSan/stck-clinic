@@ -1,6 +1,10 @@
+# Maps hash constructed from CSV to hash suitable for passing to
+# some Clinic factory.
+
 class ImportHashAttributeMapper < Struct.new(:import_hash)
   include Contracts
 
+  # Data we can map directly, which require no processing
   DIRECT_ATTRIBUTE_MAP_TABLE = {
     # Clinic info
     "Clinic name" => :clinic_name,
@@ -19,6 +23,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     "How much do you charge clients for a chlamydia test?" => :charge_ct
   }
 
+  # Data we can map after processing with numeric filter
   NUMERIC_ATTRIBUTE_MAP_TABLE = {
     "What percent of your clients are women?" => :population_women,
     "What percent of your clients are men who have sex with men (MSM)?" => :population_msm,
@@ -35,6 +40,9 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     "How many did you diagnose with HIV?" => :diag_hiv,
   }
 
+  # Constructs properly-mapped attribute hash.
+  # @return [Array] mapped attribute hash with symbol keys.
+  Contract nil => Hash
   def mapped_attribute_hash
     [
       mapped_direct_attribute_hash,
@@ -42,6 +50,9 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     ].reduce(&:merge)
   end
 
+  # Directly maps attributes.
+  # @return [Array] directly-mapped attribute hash.
+  Contract nil => Hash
   def mapped_direct_attribute_hash
     pairs = DIRECT_ATTRIBUTE_MAP_TABLE.map do |src, dest|
       Rails.logger.info("Mapping directly '#{src}' -> '#{dest}'")
@@ -51,6 +62,9 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     Hash[pairs]
   end
 
+  # Processes numeric fields and maps them.
+  # @return [Array] numerically-mapped attribute hash.
+  Contract nil => Hash
   def mapped_numeric_attribute_hash
     pairs = NUMERIC_ATTRIBUTE_MAP_TABLE.map do |src, dest|
       Rails.logger.info("Mapping numeric '#{src}' -> '#{dest}'")
@@ -60,6 +74,8 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     Hash[pairs]
   end
 
+  # Sensibly convert string value to float
+  # @return [Float] converted value
   Contract Or[String, Num, nil] => Float
   def value_to_float(raw_value)
     value = raw_value.to_s.strip

@@ -46,7 +46,7 @@ group :test do
   gem 'simplecov', '~> 0.7.1', :require => false
 end
 
-group :doc do
+group :doc, :development do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
