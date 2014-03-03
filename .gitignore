@@ -14,6 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/doc
 
 # Ignore actual database.yml
 config/database.yml
