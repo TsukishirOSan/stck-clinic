@@ -16,6 +16,8 @@
 # == Schema Information End
 #++
 
+# Top-level entity on the domain model which holds all the other stuff
+# together. Core notion of a clinic.
 class Clinic < ActiveRecord::Base
   # basic info
   validates :name, presence: true

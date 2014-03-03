@@ -1,5 +1,4 @@
-# Ineraction encompassing the entire clinic signup process
-
+# Interaction encompassing the entire clinic signup process
 class ClinicSignUpInteraction < ActiveInteraction::Base
   include Contracts
 
@@ -34,7 +33,6 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
           :deliver_results_on_phone_automated,
           :deliver_results_other
 
-  #validate :ensure_some_service_offered
   include EnsureOneService
 
   float :population_women,
@@ -72,7 +70,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
                         :population_hispanic => :hispanic,
                         :population_msm      => :msm,
                         :population_under_26 => :under_26,
-                        :population_women    => :women,
+                        :population_women    => :women
                       }, clinic, PopulationBreakdown)
 
     Rails.logger.info("Attempting to create #{PopulationBreakdown.model_name.human}")
@@ -102,13 +100,13 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
   # @return [ServiceOfferingDescription] new {ServiceOfferingDescription} attached to the {Clinic}
   def create_service_offering_description(clinic)
     attrs = map_attrs({
-                        :college_health => :college_health,
-                        :community_health => :community_health,
-                        :family_planning => :family_planning,
-                        :other => :other,
+                        :college_health     => :college_health,
+                        :community_health   => :community_health,
+                        :family_planning    => :family_planning,
+                        :other              => :other,
                         :planned_parenthood => :planned_parenthood,
-                        :private_practice => :private_practice,
-                        :std => :std
+                        :private_practice   => :private_practice,
+                        :std                => :std
                       }, clinic, ServiceOfferingDescription)
     Rails.logger.info("Attempting to create #{ServiceOfferingDescription.model_name.human}")
     ServiceOfferingDescription.create!(attrs)
@@ -120,9 +118,9 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
   def create_contact(clinic)
     attrs = map_attrs({
                         :contact_email => :email,
-                        :contact_name => :name,
+                        :contact_name  => :name,
                         :contact_phone => :phone,
-                        :contact_title => :title,
+                        :contact_title => :title
                       }, clinic).merge(clinic: clinic)
 
     Rails.logger.info("Attempting to create #{Contact.model_name.human}")
@@ -132,20 +130,18 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
   Contract nil => Clinic
   # @return [Clinic] primary {Clinic} being created
   def create_clinic
-    attrs = map_attrs({
-                        :clinic_city                     => :city,
-                        :clinic_name                     => :name,
-                        :clinic_state                    => :state,
-                        :clinic_street_address           => :street_address,
-                        :clinic_street_address_continued => :street_address_continued,
-                        :clinic_zip                      => :zip,
-                      })
+    attrs = map_attrs(:clinic_city                     => :city,
+                      :clinic_name                     => :name,
+                      :clinic_state                    => :state,
+                      :clinic_street_address           => :street_address,
+                      :clinic_street_address_continued => :street_address_continued,
+                      :clinic_zip                      => :zip)
 
     Rails.logger.info("Attempting to create #{Clinic.model_name.human}")
     Clinic.create!(attrs)
   end
 
-  Contract Hash, Or[Clinic,nil], Or[Class, nil], Or[String, nil] => Hash
+  Contract Hash, Or[Clinic, nil], Or[Class, nil], Or[String, nil] => Hash
   # Map attributes from one hash to another
   # @param [Hash] hsh hash containing the actual attributes
   # @param [Clinic,nil] clinic the {Clinic} in question
@@ -163,13 +159,8 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
       }.merge(output)
     end
 
-    if clinic.present?
-      output = {
-        clinic: clinic
-      }.merge(output)
-    end
+    output = { clinic: clinic }.merge(output) if clinic.present?
 
     output
   end
-
 end
