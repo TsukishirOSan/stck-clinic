@@ -23,17 +23,18 @@ ADD Gemfile.lock /tmp/gemstuff/Gemfile.lock
 ADD .ruby-version /tmp/gemstuff/.ruby-version
 ADD .ruby-gemset /tmp/gemstuff/.ruby-gemset
 WORKDIR /tmp/gemstuff
-RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle"
+RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle --without=test"
 
 # add Rails app
 ADD . /opt/app
 WORKDIR /opt/app
-RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle"
+RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle --without=test"
 
 # clean shit up
 RUN apt-get clean
 RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm cleanup all"
 
 # run app
+RUN echo "PANDA POWER!"
 EXPOSE 3000 3000
 CMD ["/usr/local/rvm/bin/rvm-shell", "-l", "-c", "bundle exec rails server"]
