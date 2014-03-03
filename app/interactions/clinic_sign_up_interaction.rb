@@ -1,5 +1,8 @@
+# Ineraction encompassing the entire clinic signup process
+
 class ClinicSignUpInteraction < ActiveInteraction::Base
-  # clinic info
+  include Contracts
+
   string :clinic_name, :clinic_street_address, :clinic_street_address_continued,
          :clinic_city, :clinic_state, :clinic_zip
 
@@ -45,14 +48,24 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
         :test_trich, :diag_trich,
         :test_hiv,   :diag_hiv
 
+  Contract nil => Clinic
+  # Required method called by `run` to actually do this interaction
+  # @note this method will end up creating and persisted an entire
+  # {Clinic} object graph if validations succeed.
+  # @return [Clinic] the created clinic
   def execute
     clinic = create_clinic
     create_contact(clinic)
     create_service_offering_description(clinic)
     create_population_breakdown(clinic)
     create_epi_breakdown(clinic)
+
+    clinic
   end
 
+  Contract Clinic => PopulationBreakdown
+  # @param [Clinic] clinic the parent clinic
+  # @return [PopulationBreakdown] new {PopulationBreakdown} attached to the clinic
   def create_population_breakdown(clinic)
     attrs = map_attrs({
                         :population_black    => :black,
@@ -66,6 +79,9 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
     PopulationBreakdown.create!(attrs)
   end
 
+  Contract Clinic => EpiBreakdown
+  # @param [Clinic] clinic the parent {Clinic}
+  # @return [EpiBreakdown] new {EpiBreakdown} attached to the {Clinic}
   def create_epi_breakdown(clinic)
     attrs = map_attrs({
                         :test_ct    => :test_ct,
@@ -81,6 +97,9 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
     EpiBreakdown.create!(attrs)
   end
 
+  Contract Clinic => ServiceOfferingDescription
+  # @param [Clinic] clinic the parent {Clinic}
+  # @return [ServiceOfferingDescription] new {ServiceOfferingDescription} attached to the {Clinic}
   def create_service_offering_description(clinic)
     attrs = map_attrs({
                         :college_health => :college_health,
@@ -95,6 +114,9 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
     ServiceOfferingDescription.create!(attrs)
   end
 
+  Contract Clinic => Contact
+  # @param [Clinic] clinic the parent {Clinic}
+  # @return [Contact] new {Contact} attached to the {Clinic}
   def create_contact(clinic)
     attrs = map_attrs({
                         :contact_email => :email,
@@ -107,6 +129,8 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
     Contact.create!(attrs)
   end
 
+  Contract nil => Clinic
+  # @return [Clinic] primary {Clinic} being created
   def create_clinic
     attrs = map_attrs({
                         :clinic_city                     => :city,
@@ -121,6 +145,13 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
     Clinic.create!(attrs)
   end
 
+  Contract Hash, Or[Clinic,nil], Or[Class, nil], Or[String, nil] => Hash
+  # Map attributes from one hash to another
+  # @param [Hash] hsh hash containing the actual attributes
+  # @param [Clinic,nil] clinic the {Clinic} in question
+  # @param [Class,nil] klass the Class of the object for which the attributes will be used to initialize
+  # @param [String,nil] default the default value in case property lookup fails
+  # @return [Hash]
   def map_attrs(hsh, clinic = nil, klass = nil, default = nil)
     output = hsh.map do |input_name, output_name|
       { output_name => inputs.fetch(input_name, default) }
