@@ -40,9 +40,9 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     "How many did you diagnose with HIV?" => :diag_hiv,
   }
 
+  Contract nil => Hash
   # Constructs properly-mapped attribute hash.
   # @return [Array] mapped attribute hash with symbol keys.
-  Contract nil => Hash
   def mapped_attribute_hash
     [
       mapped_direct_attribute_hash,
@@ -50,9 +50,9 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     ].reduce(&:merge)
   end
 
+  Contract nil => Hash
   # Directly maps attributes.
   # @return [Array] directly-mapped attribute hash.
-  Contract nil => Hash
   def mapped_direct_attribute_hash
     pairs = DIRECT_ATTRIBUTE_MAP_TABLE.map do |src, dest|
       Rails.logger.info("Mapping directly '#{src}' -> '#{dest}'")
@@ -62,9 +62,9 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     Hash[pairs]
   end
 
+  Contract nil => Hash
   # Processes numeric fields and maps them.
   # @return [Array] numerically-mapped attribute hash.
-  Contract nil => Hash
   def mapped_numeric_attribute_hash
     pairs = NUMERIC_ATTRIBUTE_MAP_TABLE.map do |src, dest|
       Rails.logger.info("Mapping numeric '#{src}' -> '#{dest}'")
@@ -74,9 +74,9 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     Hash[pairs]
   end
 
+  Contract Or[String, Num, nil] => Float
   # Sensibly convert string value to float
   # @return [Float] converted value
-  Contract Or[String, Num, nil] => Float
   def value_to_float(raw_value)
     value = raw_value.to_s.strip
     value.to_f
