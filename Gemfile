@@ -35,6 +35,7 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'rails-erd'
   gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'rubocop'
   gem 'yard'
 end
 
