@@ -25,6 +25,8 @@
 # == Schema Information End
 #++
 
+# Encapsulates the description of all services offered by a
+# clinic. Written to play nicely with RailsAdmin enums.
 class ServiceOfferingDescription < ActiveRecord::Base
   include Contracts
   belongs_to :clinic
@@ -36,13 +38,13 @@ class ServiceOfferingDescription < ActiveRecord::Base
 
   # options for CT charge type
   # @return [Array<String>]
-  CHARGE_CT_OPTIONS = ["Free", "Depends on the insurance", "Sliding scale", "Flat fee", "Other"]
-  validates :charge_ct, inclusion: {in: CHARGE_CT_OPTIONS}, allow_nil: true
+  CHARGE_CT_OPTIONS = ['Free', 'Depends on the insurance', 'Sliding scale', 'Flat fee', 'Other']
+  validates :charge_ct, inclusion: { in: CHARGE_CT_OPTIONS }, allow_nil: true
 
   # options for notify test ready
   # @return [Array<String>]
-  NOTIFY_TEST_READY_OPTIONS = ["No", "Yes, for people who are positive", "Yes, for all patients", "Other"]
-  validates :notify_test_ready, inclusion: {in: NOTIFY_TEST_READY_OPTIONS}, allow_nil: true
+  NOTIFY_TEST_READY_OPTIONS = ['No', 'Yes, for people who are positive', 'Yes, for all patients', 'Other']
+  validates :notify_test_ready, inclusion: { in: NOTIFY_TEST_READY_OPTIONS }, allow_nil: true
 
   Contract nil => ArrayOf[String]
   # @return [Array<String>] charge ct options to RailsAdmin smart enum
