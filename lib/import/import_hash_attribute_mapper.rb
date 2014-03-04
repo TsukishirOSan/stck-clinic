@@ -4,6 +4,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
   include Contracts
 
   # Data we can map directly, which require no processing
+  # @return [Hash] DIRECT_ATTRIBUTE_MAP_TABLE
   DIRECT_ATTRIBUTE_MAP_TABLE = {
     # Clinic info
     'Clinic name'                                              => :clinic_name,
@@ -23,6 +24,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
   }
 
   # Data we can map after processing with numeric filter
+  # @return [Hash] NUMERIC_ATTRIBUTE_MAP_TABLE
   NUMERIC_ATTRIBUTE_MAP_TABLE = {
     'What percent of your clients are women?'                           => :population_women,
     'What percent of your clients are men who have sex with men (MSM)?' => :population_msm,
