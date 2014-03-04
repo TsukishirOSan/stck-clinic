@@ -25,8 +25,6 @@
 # == Schema Information End
 #++
 
-# Encapsulates the description of all services offered by a
-# clinic. Written to play nicely with RailsAdmin enums.
 class ServiceOfferingDescription < ActiveRecord::Base
   include Contracts
   belongs_to :clinic

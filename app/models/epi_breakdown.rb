@@ -19,8 +19,6 @@
 # == Schema Information End
 #++
 
-# The EpiBreakdown model holds a clinic's data concerning STD
-# testing/diagnosis rates.
 class EpiBreakdown < ActiveRecord::Base
   belongs_to :clinic
 

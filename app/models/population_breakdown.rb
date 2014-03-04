@@ -16,7 +16,6 @@
 # == Schema Information End
 #++
 
-# The PopulationBreakdown captures demographic data for a clinic
 class PopulationBreakdown < ActiveRecord::Base
   belongs_to :clinic
 

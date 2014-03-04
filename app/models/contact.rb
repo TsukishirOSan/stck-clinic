@@ -15,8 +15,6 @@
 # == Schema Information End
 #++
 
-# The Contact model expresses a human being at the clinic who serves
-# as our primary point person for communication.
 class Contact < ActiveRecord::Base
   belongs_to :clinic
 
