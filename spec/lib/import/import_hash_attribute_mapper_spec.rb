@@ -65,23 +65,27 @@ describe ImportHashAttributeMapper do
 
   describe '#value_to_float' do
     context 'given "- " (notice the space)' do
-      it { expect(import_hash_attribute_mapper.value_to_float '- ').to eq(0.0) }
+      it { expect(import_hash_attribute_mapper.value_to_float '- ').to be(nil) }
+    end
+
+    context 'given "" (blank)' do
+      it { expect(import_hash_attribute_mapper.value_to_float '').to be(nil) }
     end
 
     context 'given nil' do
-      it { expect(import_hash_attribute_mapper.value_to_float nil).to eq(0.0) }
+      it { expect(import_hash_attribute_mapper.value_to_float nil).to be(nil) }
     end
 
     context 'given a stringified float' do
-      it { expect(import_hash_attribute_mapper.value_to_float '6.13').to eq(6.13) }
+      it { expect(import_hash_attribute_mapper.value_to_float '6.13').to be(6.13) }
     end
 
     context 'given an actual float' do
-      it { expect(import_hash_attribute_mapper.value_to_float 69.0).to eq(69) }
+      it { expect(import_hash_attribute_mapper.value_to_float 69.0).to be(69.0) }
     end
 
     context 'given an int' do
-      it { expect(import_hash_attribute_mapper.value_to_float 69).to eq(69) }
+      it { expect(import_hash_attribute_mapper.value_to_float 69).to be(69.0) }
     end
   end
 end

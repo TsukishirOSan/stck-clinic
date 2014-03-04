@@ -76,12 +76,19 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     Hash[pairs]
   end
 
-  Contract Or[String, Num, nil] => Float
+  Contract Or[String, Num, nil] => Or[Float, nil]
   # Sensibly convert string value to float
   # @param raw_value [String,Numeric] some column value
-  # @return [Float] converted value
+  # @return [Float,nil] converted value
   def value_to_float(raw_value)
-    value = raw_value.to_s.strip
-    value.to_f
+    value = raw_value.to_s.strip.chomp
+
+    if '-' == value || '' == value
+      output = nil
+    else
+      output = value.to_f
+    end
+
+    output
   end
 end
