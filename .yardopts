@@ -3,7 +3,6 @@
 --title            "STCK Clinic"
 --protected
 --no-private
---no-highlight
 -
 Dockerfile
 LICENSE
