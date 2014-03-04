@@ -1,0 +1,9 @@
+--charset          utf-8
+--readme           README.markdown
+--title            "STCK Clinic"
+--protected
+--no-private
+--no-highlight
+-
+Dockerfile
+LICENSE
