@@ -21,6 +21,8 @@
 #++
 
 class Order < ActiveRecord::Base
+  include Contracts
+
   belongs_to :clinic
 
   validates :card_quantity, presence: true, numericality: true
@@ -33,4 +35,28 @@ class Order < ActiveRecord::Base
   # @return [Array<String>]
   USE_OPTIONS = [ 'Educational', 'Promotional', 'Other' ]
   validates :use, presence: true, inclusion: { in: USE_OPTIONS }
+
+  before_validation :maybe_set_name, on: :create
+
+  Contract nil => ArrayOf[String]
+  # @return [Array<String>] use options for RailsAdmin
+  def use_enum
+    USE_OPTIONS
+  end
+
+  Contract nil => ArrayOf[String]
+  # @return [Array<String>] type options for RailsAdmin
+  def type_enum
+    TYPE_OPTIONS
+  end
+
+  private
+  Contract nil => String
+  def maybe_set_name
+    if name.present?
+      name
+    else
+      self.name = "#{Order.model_name.human} for #{Clinic.model_name.human} on #{Date.today}"
+    end
+  end
 end

@@ -23,6 +23,8 @@
 require 'spec_helper'
 
 describe Order do
+  let(:order) { FactoryGirl.build(:order) }
+
   it { should belong_to(:clinic) }
 
   it { should validate_presence_of(:card_quantity) }
@@ -35,7 +37,33 @@ describe Order do
 
   describe '#valid?' do
     context 'given valid attributes' do
-      it { expect(FactoryGirl.build(:order)).to be_valid }
+      it { expect(order).to be_valid }
+    end
+  end
+
+  describe '#use_enum' do
+    it { expect(order.use_enum).to eq(Order::USE_OPTIONS) }
+  end
+
+  describe '#type_enum' do
+    it { expect(order.type_enum).to eq(Order::TYPE_OPTIONS) }
+  end
+
+  describe '#name' do
+    context 'given no name' do
+      it 'creates one' do
+        order.name = nil
+        order.save!
+        expect(order.name.length).to be > 0
+      end
+    end
+
+    context 'given a name' do
+      it 'leaves it alone' do
+        name_before = order.name
+        order.save!
+        expect(order.name).to eq(name_before)
+      end
     end
   end
 end
