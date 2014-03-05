@@ -77,6 +77,9 @@ describe Order do
     context 'when sent_on gets Sent' do
       it 'changes to Sent' do
         order.status = 'Unsent'
+        order.sent_on = nil
+        order.save!
+        expect(order.status).to eq('Unsent')
         order.sent_on = Date.today
         order.save!
         expect(order.status).to eq('Sent')

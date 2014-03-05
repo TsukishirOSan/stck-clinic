@@ -42,7 +42,7 @@ class Order < ActiveRecord::Base
   validates :status, presence: true, inclusion: { in: STATUS_OPTIONS }
 
   before_validation :maybe_set_name, on: :create
-  before_validation :set_status_if_sent, on: [ :create, :save ]
+  before_validation :set_status_if_sent#, on: :save
 
   Contract nil => ArrayOf[String]
   # @return [Array<String>] use options for RailsAdmin
@@ -75,6 +75,8 @@ class Order < ActiveRecord::Base
   def set_status_if_sent
     if sent_on.present?
       self.status = 'Sent'
+    else
+      self.status = 'Unsent' if self.persisted?
     end
 
     self.status
