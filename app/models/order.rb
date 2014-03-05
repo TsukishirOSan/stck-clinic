@@ -11,9 +11,10 @@
 # *id*::                <tt>integer, not null, primary key</tt>
 # *name*::              <tt>string(255)</tt>
 # *notes*::             <tt>text</tt>
+# *order_type*::        <tt>string(255)</tt>
 # *postage_cost*::      <tt>float</tt>
 # *sent_on*::           <tt>date</tt>
-# *type*::              <tt>string(255)</tt>
+# *status*::            <tt>string(255)</tt>
 # *updated_at*::        <tt>datetime</tt>
 # *use*::               <tt>string(255)</tt>
 #--
@@ -41,6 +42,7 @@ class Order < ActiveRecord::Base
   validates :status, presence: true, inclusion: { in: STATUS_OPTIONS }
 
   before_validation :maybe_set_name, on: :create
+  before_validation :set_status_if_sent, on: [ :create, :save ]
 
   Contract nil => ArrayOf[String]
   # @return [Array<String>] use options for RailsAdmin
@@ -67,5 +69,14 @@ class Order < ActiveRecord::Base
     else
       self.name = "#{Order.model_name.human} for #{Clinic.model_name.human} on #{Date.today}"
     end
+  end
+
+  Contract nil => Or[String, nil]
+  def set_status_if_sent
+    if sent_on.present?
+      self.status = 'Sent'
+    end
+
+    self.status
   end
 end

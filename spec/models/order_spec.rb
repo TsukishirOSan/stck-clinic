@@ -11,9 +11,10 @@
 # *id*::                <tt>integer, not null, primary key</tt>
 # *name*::              <tt>string(255)</tt>
 # *notes*::             <tt>text</tt>
+# *order_type*::        <tt>string(255)</tt>
 # *postage_cost*::      <tt>float</tt>
 # *sent_on*::           <tt>date</tt>
-# *type*::              <tt>string(255)</tt>
+# *status*::            <tt>string(255)</tt>
 # *updated_at*::        <tt>datetime</tt>
 # *use*::               <tt>string(255)</tt>
 #--
@@ -68,6 +69,17 @@ describe Order do
         name_before = order.name
         order.save!
         expect(order.name).to eq(name_before)
+      end
+    end
+  end
+
+  describe 'status' do
+    context 'when sent_on gets Sent' do
+      it 'changes to Sent' do
+        order.status = 'Unsent'
+        order.sent_on = Date.today
+        order.save!
+        expect(order.status).to eq('Sent')
       end
     end
   end

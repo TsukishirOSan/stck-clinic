@@ -11,9 +11,10 @@
 # *id*::                <tt>integer, not null, primary key</tt>
 # *name*::              <tt>string(255)</tt>
 # *notes*::             <tt>text</tt>
+# *order_type*::        <tt>string(255)</tt>
 # *postage_cost*::      <tt>float</tt>
 # *sent_on*::           <tt>date</tt>
-# *type*::              <tt>string(255)</tt>
+# *status*::            <tt>string(255)</tt>
 # *updated_at*::        <tt>datetime</tt>
 # *use*::               <tt>string(255)</tt>
 #--
@@ -30,7 +31,7 @@ FactoryGirl.define do
     notes "Notes notes notes notes notes"
     order_type { Order::TYPE_OPTIONS.first }
     postage_cost 1.5
-    sent_on { 5.days.ago }
+    sent_on { nil } #5.days.ago }
     sequence(:brochure_quantity) {|n| n}
     sequence(:card_quantity) {|n| n }
     sequence(:clinic_code) {|n| "Clinic Code #{n}" }
