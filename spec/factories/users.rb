@@ -2,21 +2,21 @@
 #
 # Table name: users
 #
-# *id*::                     <tt>integer, not null, primary key</tt>
+# *admin*::                  <tt>boolean</tt>
+# *created_at*::             <tt>datetime</tt>
+# *current_sign_in_at*::     <tt>datetime</tt>
+# *current_sign_in_ip*::     <tt>string(255)</tt>
 # *email*::                  <tt>string(255), default(""), not null</tt>
 # *encrypted_password*::     <tt>string(255), default(""), not null</tt>
-# *reset_password_token*::   <tt>string(255)</tt>
-# *reset_password_sent_at*:: <tt>datetime</tt>
-# *remember_created_at*::    <tt>datetime</tt>
-# *sign_in_count*::          <tt>integer, default(0), not null</tt>
-# *current_sign_in_at*::     <tt>datetime</tt>
+# *id*::                     <tt>integer, not null, primary key</tt>
 # *last_sign_in_at*::        <tt>datetime</tt>
-# *current_sign_in_ip*::     <tt>string(255)</tt>
 # *last_sign_in_ip*::        <tt>string(255)</tt>
-# *created_at*::             <tt>datetime</tt>
-# *updated_at*::             <tt>datetime</tt>
-# *admin*::                  <tt>boolean</tt>
 # *name*::                   <tt>string(255)</tt>
+# *remember_created_at*::    <tt>datetime</tt>
+# *reset_password_sent_at*:: <tt>datetime</tt>
+# *reset_password_token*::   <tt>string(255)</tt>
+# *sign_in_count*::          <tt>integer, default(0), not null</tt>
+# *updated_at*::             <tt>datetime</tt>
 #--
 # == Schema Information End
 #++

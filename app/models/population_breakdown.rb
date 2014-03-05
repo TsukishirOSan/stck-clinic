@@ -2,16 +2,16 @@
 #
 # Table name: population_breakdowns
 #
-# *id*::         <tt>integer, not null, primary key</tt>
-# *name*::       <tt>string(255)</tt>
-# *women*::      <tt>float</tt>
-# *msm*::        <tt>float</tt>
-# *under_26*::   <tt>float</tt>
 # *black*::      <tt>float</tt>
-# *hispanic*::   <tt>float</tt>
 # *clinic_id*::  <tt>integer</tt>
 # *created_at*:: <tt>datetime</tt>
+# *hispanic*::   <tt>float</tt>
+# *id*::         <tt>integer, not null, primary key</tt>
+# *msm*::        <tt>float</tt>
+# *name*::       <tt>string(255)</tt>
+# *under_26*::   <tt>float</tt>
 # *updated_at*:: <tt>datetime</tt>
+# *women*::      <tt>float</tt>
 #--
 # == Schema Information End
 #++

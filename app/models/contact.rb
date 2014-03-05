@@ -2,14 +2,14 @@
 #
 # Table name: contacts
 #
-# *id*::         <tt>integer, not null, primary key</tt>
-# *name*::       <tt>string(255)</tt>
-# *title*::      <tt>string(255)</tt>
-# *phone*::      <tt>string(255)</tt>
-# *email*::      <tt>string(255)</tt>
-# *notes*::      <tt>text</tt>
 # *clinic_id*::  <tt>integer</tt>
 # *created_at*:: <tt>datetime</tt>
+# *email*::      <tt>string(255)</tt>
+# *id*::         <tt>integer, not null, primary key</tt>
+# *name*::       <tt>string(255)</tt>
+# *notes*::      <tt>text</tt>
+# *phone*::      <tt>string(255)</tt>
+# *title*::      <tt>string(255)</tt>
 # *updated_at*:: <tt>datetime</tt>
 #--
 # == Schema Information End

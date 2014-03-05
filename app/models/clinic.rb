@@ -2,16 +2,16 @@
 #
 # Table name: clinics
 #
+# *city*::                     <tt>string(255)</tt>
+# *created_at*::               <tt>datetime</tt>
 # *id*::                       <tt>integer, not null, primary key</tt>
 # *name*::                     <tt>string(255)</tt>
-# *street_address*::           <tt>string(255)</tt>
-# *city*::                     <tt>string(255)</tt>
-# *state*::                    <tt>string(255)</tt>
-# *zip*::                      <tt>string(255)</tt>
-# *created_at*::               <tt>datetime</tt>
-# *updated_at*::               <tt>datetime</tt>
-# *street_address_continued*:: <tt>string(255)</tt>
 # *notes*::                    <tt>text</tt>
+# *state*::                    <tt>string(255)</tt>
+# *street_address*::           <tt>string(255)</tt>
+# *street_address_continued*:: <tt>string(255)</tt>
+# *updated_at*::               <tt>datetime</tt>
+# *zip*::                      <tt>string(255)</tt>
 #--
 # == Schema Information End
 #++
