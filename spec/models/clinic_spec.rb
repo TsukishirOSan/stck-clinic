@@ -25,6 +25,7 @@ describe Clinic do
   it { should have_one(:population_breakdown) }
   it { should have_one(:service_offering_description) }
   it { should have_one(:epi_breakdown) }
+  it { should have_many(:orders) }
   # basic info
   it { should validate_presence_of(:city) }
   it { should validate_presence_of(:state) }

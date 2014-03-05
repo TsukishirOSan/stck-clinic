@@ -28,4 +28,5 @@ class Clinic < ActiveRecord::Base
   has_one :population_breakdown
   has_one :service_offering_description
   has_one :epi_breakdown
+  has_many :orders
 end
