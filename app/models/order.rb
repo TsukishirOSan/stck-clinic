@@ -36,6 +36,10 @@ class Order < ActiveRecord::Base
   USE_OPTIONS = [ 'Educational', 'Promotional', 'Other' ]
   validates :use, presence: true, inclusion: { in: USE_OPTIONS }
 
+  # @return [Array<String>]
+  STATUS_OPTIONS = [ 'Unsent', 'Sent' ]
+  validates :status, presence: true, inclusion: { in: STATUS_OPTIONS }
+
   before_validation :maybe_set_name, on: :create
 
   Contract nil => ArrayOf[String]
@@ -48,6 +52,11 @@ class Order < ActiveRecord::Base
   # @return [Array<String>] type options for RailsAdmin
   def order_type_enum
     TYPE_OPTIONS
+  end
+
+  Contract nil => ArrayOf[String]
+  def status_enum
+    STATUS_OPTIONS
   end
 
   private

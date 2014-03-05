@@ -25,16 +25,17 @@
 FactoryGirl.define do
   factory :order do
     sequence(:name) {|n| "Order #{n}" }
-    sequence(:card_quantity) {|n| n }
-    sequence(:brochure_quantity) {|n| n}
-    sent_on { 5.days.ago }
-    # FIXME: make these enums
-    order_type { Order::TYPE_OPTIONS.first }
-    use { Order::USE_OPTIONS.first }
+
     envelope_cost 1.5
-    postage_cost 1.5
-    sequence(:clinic_code) {|n| "Clinic Code #{n}" }
     notes "Notes notes notes notes notes"
+    order_type { Order::TYPE_OPTIONS.first }
+    postage_cost 1.5
+    sent_on { 5.days.ago }
+    sequence(:brochure_quantity) {|n| n}
+    sequence(:card_quantity) {|n| n }
+    sequence(:clinic_code) {|n| "Clinic Code #{n}" }
+    status { Order::STATUS_OPTIONS.first }
+    use { Order::USE_OPTIONS.first }
 
     clinic
   end
