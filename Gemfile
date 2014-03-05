@@ -17,7 +17,7 @@ gem 'turbolinks' # Turbolinks makes following links in your web application fast
 # MAIN STUFF
 gem 'active_interaction'
 gem 'awesome_print'
-gem 'contracts', git: 'git@github.com:egonSchiele/contracts.ruby.git'
+gem 'contracts', git: 'https://github.com/egonSchiele/contracts.ruby.git'
 gem 'devise'
 gem 'puma'
 gem 'rails_admin'

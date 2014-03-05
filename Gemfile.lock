@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:egonSchiele/contracts.ruby.git
+  remote: https://github.com/egonSchiele/contracts.ruby.git
   revision: 04ec0c89d98ab8218ac7a2498f3e398a5908de3a
   specs:
     contracts (0.3)
