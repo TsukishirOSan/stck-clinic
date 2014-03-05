@@ -29,7 +29,7 @@ FactoryGirl.define do
     sequence(:brochure_quantity) {|n| n}
     sent_on { 5.days.ago }
     # FIXME: make these enums
-    type { Order::TYPE_OPTIONS.first }
+    order_type { Order::TYPE_OPTIONS.first }
     use { Order::USE_OPTIONS.first }
     envelope_cost 1.5
     postage_cost 1.5

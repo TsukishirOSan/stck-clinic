@@ -30,7 +30,7 @@ class Order < ActiveRecord::Base
 
   # @return [Array<String>]
   TYPE_OPTIONS = [ 'Mixed', 'All Color', 'All BW' ]
-  validates :type, presence: true, inclusion: { in: TYPE_OPTIONS }
+  validates :order_type, presence: true, inclusion: { in: TYPE_OPTIONS }
 
   # @return [Array<String>]
   USE_OPTIONS = [ 'Educational', 'Promotional', 'Other' ]
@@ -46,7 +46,7 @@ class Order < ActiveRecord::Base
 
   Contract nil => ArrayOf[String]
   # @return [Array<String>] type options for RailsAdmin
-  def type_enum
+  def order_type_enum
     TYPE_OPTIONS
   end
 

@@ -33,7 +33,7 @@ describe Order do
   it { should validate_numericality_of(:brochure_quantity) }
 
   it { should ensure_inclusion_of(:use).in_array(Order::USE_OPTIONS) }
-  it { should ensure_inclusion_of(:type).in_array(Order::TYPE_OPTIONS) }
+  it { should ensure_inclusion_of(:order_type).in_array(Order::TYPE_OPTIONS) }
 
   describe '#valid?' do
     context 'given valid attributes' do
@@ -45,8 +45,8 @@ describe Order do
     it { expect(order.use_enum).to eq(Order::USE_OPTIONS) }
   end
 
-  describe '#type_enum' do
-    it { expect(order.type_enum).to eq(Order::TYPE_OPTIONS) }
+  describe '#order_type_enum' do
+    it { expect(order.order_type_enum).to eq(Order::TYPE_OPTIONS) }
   end
 
   describe '#name' do
