@@ -24,5 +24,16 @@ FactoryGirl.define do
     sequence(:street_address) {|n| "Clinic street address #{n}" }
     sequence(:street_address_continued) {|n| "Clinic street address continued #{n}" }
     sequence(:zip) {|n| "Clinic zip #{n}" }
+
+    after(:build) do |clinic, evaluator|
+      clinic.contact = FactoryGirl.build(:contact, clinic: clinic)
+      clinic.epi_breakdown = FactoryGirl.build(:epi_breakdown, clinic: clinic)
+      clinic.population_breakdown = FactoryGirl.build(:population_breakdown, clinic: clinic)
+      clinic.service_offering_description = FactoryGirl.build(:service_offering_description, clinic: clinic)
+    end
+
+    after(:create) do |clinic, evaluator|
+      create_list(:order, 5, clinic: clinic)
+    end
   end
 end
