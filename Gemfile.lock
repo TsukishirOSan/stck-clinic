@@ -85,6 +85,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     docile (1.1.3)
+    dotenv (0.10.0)
     erubis (2.7.0)
     execjs (2.0.2)
     factory_girl (4.4.0)
@@ -297,6 +298,7 @@ DEPENDENCIES
   capybara
   contracts!
   devise
+  dotenv
   factory_girl_rails
   jquery-rails
   launchy

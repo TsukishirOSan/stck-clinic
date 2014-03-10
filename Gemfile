@@ -30,6 +30,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'brakeman'
+  gem 'dotenv'
   gem 'factory_girl_rails'
   gem 'oink'
   gem 'pry-nav'
