@@ -12,7 +12,7 @@ class DataCsvReader < Struct.new(:path)
   def rows
     @rows ||= CSV.read(path)
             .each_with_index
-            .reject {|row, index| (1..5).include?(index) }
+            .reject {|row, index| (1..3).include?(index) }
             .map(&:first)
   end
 
