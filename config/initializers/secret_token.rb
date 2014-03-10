@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-StckClinic::Application.config.secret_key_base = 'c48490a45545b103f0622459be3935c11a726b0b388b5a1b34f4ba5e3915ecc1431d57a0fc5638a148308bc8720d7c25d362bcb287ef8401e537a90560207802'
+StckClinic::Application.config.secret_key_base = ENV['SECRET_TOKEN'] || 'c48490a45545b103f0622459be3935c11a726b0b388b5a1b34f4ba5e3915ecc1431d57a0fc5638a148308bc8720d7c25d362bcb287ef8401e537a90560207802'
