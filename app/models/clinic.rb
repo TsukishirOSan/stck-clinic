@@ -17,6 +17,8 @@
 #++
 
 class Clinic < ActiveRecord::Base
+  has_paper_trail
+
   # basic info
   validates :name, presence: true
   validates :city, presence: true

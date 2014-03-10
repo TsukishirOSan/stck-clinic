@@ -20,6 +20,8 @@
 #++
 
 class EpiBreakdown < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :clinic
 
   [:test_ct,    :diag_ct,

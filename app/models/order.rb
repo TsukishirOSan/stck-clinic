@@ -22,6 +22,7 @@
 #++
 
 class Order < ActiveRecord::Base
+  has_paper_trail
   include Contracts
 
   belongs_to :clinic
