@@ -4,6 +4,7 @@ class MultiValueColumnProcessor < Struct.new(:raw_column_value, :transformation_
 
   Contract nil => Hash
   # maps import column values to their model attribute equivalents
+  # @raise [RuntimeError] if the column contains a value we don't know how to map
   # @return [Hash] the mapped attribute hash
   def values_hash
     column_values = preprocess_column(raw_column_value)
