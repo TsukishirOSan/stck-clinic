@@ -24,7 +24,7 @@ class MultiValueColumnProcessor < Struct.new(:raw_column_value, :transformation_
 
   Contract String => ArrayOf[String]
   # splits column on comma character and cleans up values
-  # @param [String] the raw column
+  # @param [String] raw_column the raw column
   # @return [Array<String>] the array of cleaned up string values
   def preprocess_column(raw_column)
     raw_column.split(',')
