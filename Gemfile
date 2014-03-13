@@ -24,6 +24,7 @@ gem 'puma'
 gem 'rails_admin'
 gem 'simple_form'
 gem 'twitter-bootstrap-rails'
+gem 'uuid'
 
 group :development, :test do
   gem 'annotate'
@@ -32,6 +33,7 @@ group :development, :test do
   gem 'brakeman'
   gem 'dotenv'
   gem 'factory_girl_rails'
+  gem 'letter_opener'
   gem 'oink'
   gem 'pry-nav'
   gem 'quiet_assets'

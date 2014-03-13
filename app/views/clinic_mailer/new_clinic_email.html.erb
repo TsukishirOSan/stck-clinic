@@ -1,0 +1,12 @@
+<h1>A new <%= Clinic.model_name.human %> has signed up!</h1>
+
+<p>
+  <strong><%= Clinic.model_name.human %> <%= Clinic.human_attribute_name(:name) %></strong>:
+  <%= link_to @clinic.name, rails_admin.show_url(model_name: "clinic", id: @clinic.id) %>
+</p>
+
+<hr />
+
+<p>Lucky number: <%= UUID.generate(:compact).to_i(16).to_s(10) %></p>
+
+<p>Sent at: <%= Time.current.to_s %></p>
