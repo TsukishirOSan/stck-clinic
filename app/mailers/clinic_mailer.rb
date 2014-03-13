@@ -7,4 +7,12 @@ class ClinicMailer < ActionMailer::Base
     mail(to: 'stckclinic@sexualhealthinnovations.org',
          subject: "New #{Clinic.model_name.human} signup on STCK Clinic!")
   end
+
+  def new_order_email(order)
+    @order = order
+    @clinic = order.clinic
+
+    mail(to: 'john.and.kay@gmail.com',
+         subject: "New #{Order.model_name.human} created on STCK Clinic!")
+  end
 end

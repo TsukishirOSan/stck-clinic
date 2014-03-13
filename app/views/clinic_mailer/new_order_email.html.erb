@@ -1,0 +1,27 @@
+<style>
+ .clinic_address {
+   margin: 2em 2em 2em 2em;
+   padding: 2em 2em 2em 2em;
+   border: 1px black dashed;
+ }
+</style>
+
+<p>A new <%= Order.model_name.human %> has been created in STCK Clinic!</p>
+
+<p>The <%= Clinic.model_name.human %> information is</p>
+
+<h1>&#9986;</h1>
+
+<div class="clinic_address">
+  <%= @clinic.name %><br />
+  Attention: <%= @clinic.contact.name %><br />
+  <%= @clinic.street_address %><br />
+  <% if @clinic.street_address_continued.present?  %>
+    <%= @clinic.street_address_continued %><br />
+  <% end %>
+  <%= @clinic.city %>, <%= @clinic.state %> <%= @clinic.zip%><br />
+</div>
+
+<p><%= Order.model_name.human %> is: <%= @order.card_quantity %> <%= @order.order_type %> cards and <%= @order.brochure_quantity %> brochures for <%= @order.use %> purposes.</p>
+
+<p>Check it out: <%= link_to @order.name, rails_admin.show_url(model_name: 'order', id: @order.id) %>
