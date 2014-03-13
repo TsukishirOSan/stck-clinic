@@ -141,7 +141,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
     Clinic.create!(attrs)
   end
 
-  Contract Hash, Or[Clinic, nil], Or[Class, nil], Or[String, nil] => Hash
+  Contract Hash, Maybe[Clinic], Maybe[Class], Maybe[String] => Hash
   # Map attributes from one hash to another
   # @param [Hash] hsh hash containing the actual attributes
   # @param [Clinic,nil] clinic the {Clinic} in question
