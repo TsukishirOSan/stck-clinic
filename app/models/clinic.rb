@@ -18,6 +18,7 @@
 
 class Clinic < ActiveRecord::Base
   has_paper_trail
+  include Contracts
 
   # basic info
   validates :name, presence: true
@@ -31,4 +32,18 @@ class Clinic < ActiveRecord::Base
   has_one :service_offering_description
   has_one :epi_breakdown
   has_many :orders
+
+  after_create :send_notification_email
+
+  private
+  Contract nil => Maybe[Bool]
+  def send_notification_email
+    if ClinicMailer.new_clinic_email(self).deliver
+      Rails.logger.info("Sent new #{Clinic.model_name.human} notification for #{self.id}")
+      true
+    else
+      Rails.logger.info("Couldn't send new #{Clinic.model_name.human} notification for #{self.id}")
+      false
+    end
+  end
 end

@@ -44,6 +44,7 @@ class Order < ActiveRecord::Base
 
   before_validation :maybe_set_name, on: :create
   before_validation :set_status_if_sent#, on: :save
+  after_create :send_notification_email
 
   Contract nil => ArrayOf[String]
   # @return [Array<String>] use options for RailsAdmin
@@ -81,5 +82,17 @@ class Order < ActiveRecord::Base
     end
 
     self.status
+  end
+
+  Contract nil => Maybe[Bool]
+  def send_notification_email
+    if ClinicMailer.new_order_email(self).deliver
+      Rails.logger.info("Sent new #{Order.model_name.human} notification for #{self.id}")
+      true
+    else
+      Rails.logger.info("Couldn't send new #{Order.model_name.human} notification for #{self.id}")
+      false
+    end
+
   end
 end
