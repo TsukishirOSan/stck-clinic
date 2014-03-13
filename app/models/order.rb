@@ -72,7 +72,7 @@ class Order < ActiveRecord::Base
     end
   end
 
-  Contract nil => Maybe[String]
+  Contract nil => Or[String, nil]
   def set_status_if_sent
     if sent_on.present?
       self.status = 'Sent'

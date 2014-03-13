@@ -78,7 +78,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     Hash[pairs]
   end
 
-  Contract Or[String, Num, nil] => Maybe[Float]
+  Contract Or[String, Num, nil] => Or[Float, nil]
   # Sensibly convert string value to float
   # @param raw_value [String,Numeric] some column value
   # @return [Float,nil] converted value
