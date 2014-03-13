@@ -1,5 +1,5 @@
 class ClinicMailer < ActionMailer::Base
-  default from: "noreply+StckClinicMonkey@example.com"
+  default from: "noreply+StckClinicMonkey@sexualhealthinnovations.org"
 
   def new_clinic_email(clinic)
     @clinic = clinic
