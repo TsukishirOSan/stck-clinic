@@ -37,6 +37,9 @@ class Clinic < ActiveRecord::Base
 
   private
   Contract nil => Maybe[Bool]
+  # handle sending notification upon new clinic creation
+  # @api private
+  # @return [true,false] success of sending notification email
   def send_notification_email
     if ClinicMailer.new_clinic_email(self).deliver
       Rails.logger.info("Sent new #{Clinic.model_name.human} notification for #{self.id}")

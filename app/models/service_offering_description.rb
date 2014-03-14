@@ -47,12 +47,16 @@ class ServiceOfferingDescription < ActiveRecord::Base
   validates :notify_test_ready, inclusion: { in: NOTIFY_TEST_READY_OPTIONS }, allow_nil: true
 
   Contract nil => ArrayOf[String]
+  # RailsAdmin enum functionality
+  # @api private
   # @return [Array<String>] charge ct options to RailsAdmin smart enum
   def charge_ct_enum
     CHARGE_CT_OPTIONS
   end
 
   Contract nil => ArrayOf[String]
+  # RailsAdmin enum functionality
+  # @api private
   # @return [Array<String>] notify test ready options to RailsAdmin smart enum
   def notify_test_ready_enum
     NOTIFY_TEST_READY_OPTIONS

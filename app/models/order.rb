@@ -47,24 +47,34 @@ class Order < ActiveRecord::Base
   after_create :send_notification_email
 
   Contract nil => ArrayOf[String]
+  # RailsAdmin enum functionality
+  # @api private
   # @return [Array<String>] use options for RailsAdmin
   def use_enum
     USE_OPTIONS
   end
 
   Contract nil => ArrayOf[String]
+  # RailsAdmin enum functionality
+  # @api private
   # @return [Array<String>] type options for RailsAdmin
   def order_type_enum
     TYPE_OPTIONS
   end
 
   Contract nil => ArrayOf[String]
+  # RailsAdmin enum functionality
+  # @api private
+  # @return [Array<String>] status options for RailsAdmin
   def status_enum
     STATUS_OPTIONS
   end
 
   private
   Contract nil => String
+  # set name unless one exists
+  # @api private
+  # @return [String]
   def maybe_set_name
     if name.present?
       name
@@ -74,6 +84,9 @@ class Order < ActiveRecord::Base
   end
 
   Contract nil => Maybe[String]
+  # toggle status if sent_at date set
+  # @api private
+  # @return [String,nil]
   def set_status_if_sent
     if sent_on.present?
       self.status = 'Sent'
@@ -85,6 +98,9 @@ class Order < ActiveRecord::Base
   end
 
   Contract nil => Maybe[Bool]
+  # send notification email after create
+  # @api private
+  # @return [Bool,nil]
   def send_notification_email
     if ClinicMailer.new_order_email(self).deliver
       Rails.logger.info("Sent new #{Order.model_name.human} notification for #{self.id}")
