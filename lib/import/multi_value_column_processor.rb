@@ -5,6 +5,9 @@ class MultiValueColumnProcessor < Struct.new(:raw_column_value, :transformation_
   Contract nil => Hash
   # maps import column values to their model attribute equivalents
   # @raise [RuntimeError] if the column contains a value we don't know how to map
+  # @api public
+  # @example
+  #   multi_value_column_processor.values_hash #=> [{...}, ...]
   # @return [Hash] the mapped attribute hash
   def values_hash
     column_values = preprocess_column(raw_column_value)
@@ -25,6 +28,9 @@ class MultiValueColumnProcessor < Struct.new(:raw_column_value, :transformation_
   Contract String => ArrayOf[String]
   # splits column on comma character and cleans up values
   # @param [String] raw_column the raw column
+  # @api public
+  # @example
+  #   multi_value_column_processor.preprocess_column("panda, bamboo, curry")
   # @return [Array<String>] the array of cleaned up string values
   def preprocess_column(raw_column)
     raw_column.split(',')

@@ -41,6 +41,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'rubocop'
   gem 'yard'
+  gem 'yardstick'
 end
 
 group :test do
