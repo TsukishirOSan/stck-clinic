@@ -17,7 +17,7 @@ describe ImportHashAttributeMapper do
       "State" => "California",
       "Zip code" => "12345",
       "Title" => nil,
-      "Clinic type" => "STD clinic",
+      "Clinic type" => "Community Health Center, STD Clinic",
       "What percent of your clients are women?" => "45",
       "What percent of your clients are men who have sex with men (MSM)?" => "5",
       "What percent of your clients are under 26?" => "60",
@@ -32,7 +32,7 @@ describe ImportHashAttributeMapper do
       "How many did you test for HIV?" => "650",
       "How many did you diagnose with HIV?" => "6",
       "How much do you charge clients for a chlamydia test?" => "Free",
-      "How do you deliver chlamydia test results?" => "on the phone",
+      "How do you deliver chlamydia test results?" => "In person, On the phone (with a human being answering/calling)",
       "Do you notify clients when their test results are ready?" => "Yes, for people who are positive",
       "Do you routinely ask clients if they are getting tested because of a partner notification?" => "Yes",
     }
@@ -55,12 +55,33 @@ describe ImportHashAttributeMapper do
     let(:mapped_attribute_hash) { import_hash_attribute_mapper.mapped_numeric_attribute_hash }
     subject { mapped_attribute_hash }
 
-    ImportHashAttributeMapper::NUMERIC_ATTRIBUTE_MAP_TABLE.each do |src,dest|
+    ImportHashAttributeMapper::NUMERIC_ATTRIBUTE_MAP_TABLE.each do |src, dest|
       context "#{src} -> #{dest} " do
         it { should have_key(dest) }
         it { expect(mapped_attribute_hash[dest]).to eq(import_hash_attribute_mapper.value_to_float import_hash[src]) }
       end
     end
+  end
+
+  describe '#mapped_multi_value_hash' do
+    let(:mapped_attribute_hash) { import_hash_attribute_mapper.mapped_attribute_hash }
+    subject { mapped_attribute_hash }
+
+    ImportHashAttributeMapper::MULTI_VALUE_ATTRIBUTE_MAP_TABLE.each do |src_column_name, map|
+      context "Source column name: #{src_column_name}" do
+        map.each do |src, dest|
+          it { should have_key(dest) }
+        end
+      end
+    end
+
+    it { expect(mapped_attribute_hash[:college_health]).to be_falsy }
+    it { expect(mapped_attribute_hash[:deliver_results_online]).to be_falsy }
+
+    it { expect(mapped_attribute_hash[:std]).to be_truthy }
+    it { expect(mapped_attribute_hash[:community_health]).to be_truthy }
+    it { expect(mapped_attribute_hash[:deliver_results_in_person]).to be_truthy }
+    it { expect(mapped_attribute_hash[:deliver_results_on_phone_human]).to be_truthy }
   end
 
   describe '#value_to_float' do

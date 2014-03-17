@@ -4,10 +4,10 @@
 class ImportHashAttributeMapper < Struct.new(:import_hash)
   include Contracts
 
-  Contract nil => Hash
+  Contract nil => HashOf[String,Symbol]
   # Data we can map directly, which require no processing
   # @api private
-  # @return [Hash] DIRECT_ATTRIBUTE_MAP_TABLE
+  # @return [Hash<String, Symbol>] DIRECT_ATTRIBUTE_MAP_TABLE
   DIRECT_ATTRIBUTE_MAP_TABLE = {
     # Clinic info
     'Clinic name'                                              => :clinic_name,
@@ -26,10 +26,10 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
     'How much do you charge clients for a chlamydia test?'     => :charge_ct
   }
 
-  Contract nil => Hash
+  Contract nil => Hash[String, Symbol]
   # Data we can map after processing with numeric filter
   # @api private
-  # @return [Hash] NUMERIC_ATTRIBUTE_MAP_TABLE
+  # @return [Hash<String, Symbol>] NUMERIC_ATTRIBUTE_MAP_TABLE
   NUMERIC_ATTRIBUTE_MAP_TABLE = {
     'What percent of your clients are women?'                           => :population_women,
     'What percent of your clients are men who have sex with men (MSM)?' => :population_msm,
@@ -47,20 +47,56 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
   }
 
   Contract nil => Hash
+  # Showing how to map columns with multiple values
+  # @api private
+  # @return [Hash<String, Hash<String, Symbol>>] MULTI_VALUE_ATTRIBUTE_MAP_TABLE
+  MULTI_VALUE_ATTRIBUTE_MAP_TABLE = {
+    'Clinic type' => {
+      'std clinic'                       => :std,
+      'college health center'            => :college_health,
+      'community health center'          => :community_health,
+      'family planning clinic'           => :family_planning,
+      'planned parenthood health center' => :planned_parenthood,
+      'private practice'                 => :private_practive,
+      'other'                            => :other
+    },
+    'How do you deliver chlamydia test results?' => {
+      'online'                                                       => :deliver_results_online,
+      'in person'                                                    => :deliver_results_in_person,
+      'on the phone (with a human being answering/calling)'          => :deliver_results_on_phone_human,
+      'on the phone (with an automated voice delivering the result)' => :deliver_results_on_phone_automated,
+      'other'                                                        => :deliver_results_other
+    }
+  }
+
+  Contract nil => HashOf[Symbol, Or[String, Float, nil]]
   # Constructs properly-mapped attribute hash
   # @api public
-  # @return [Array<Hash {Symbol => String,Float}>] mapped attribute hash with symbol keys.
+  # @return [Array<Hash {Symbol => String, Float, nil}>] mapped attribute hash with symbol keys.
   def mapped_attribute_hash
     [
       mapped_direct_attribute_hash,
+      mapped_multi_value_hash,
       mapped_numeric_attribute_hash
     ].reduce(&:merge)
   end
 
-  Contract nil => Hash
+  Contract nil => HashOf[Symbol, Bool]
+  # Convert columns containing multiple values to their bool column equivalents
+  # @api private
+  # return [Hash] qwweew
+  def mapped_multi_value_hash
+    MULTI_VALUE_ATTRIBUTE_MAP_TABLE.map do |column_name, map|
+      output = MultiValueColumnProcessor.new(import_hash.fetch(column_name, ''), map).values_hash
+
+      output
+    end.flatten.reduce(&:merge)
+  end
+
+  Contract nil => HashOf[Symbol, Or[String, Float, nil]]
   # Directly maps attributes
   # @api private
-  # @return [Array<Hash {Symbol => String,Float}>] directly-mapped attribute hash
+  # @return [Array<Hash {Symbol => String, Float}>] directly-mapped attribute hash
   def mapped_direct_attribute_hash
     pairs = DIRECT_ATTRIBUTE_MAP_TABLE.map do |src, dest|
       Rails.logger.info("Mapping directly '#{src}' -> '#{dest}'")

@@ -2,13 +2,13 @@
 class MultiValueColumnProcessor < Struct.new(:raw_column_value, :transformation_map)
   include Contracts
 
-  Contract nil => Hash
+  Contract nil => HashOf[Symbol, Bool]
   # maps import column values to their model attribute equivalents
   # @raise [RuntimeError] if the column contains a value we don't know how to map
   # @api public
   # @example
   #   multi_value_column_processor.values_hash #=> [{...}, ...]
-  # @return [Hash] the mapped attribute hash
+  # @return [Hash<Symbol, Bool>] the mapped attribute hash
   def values_hash
     column_values = preprocess_column(raw_column_value)
 

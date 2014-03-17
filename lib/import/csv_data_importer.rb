@@ -23,7 +23,7 @@ class CsvDataImporter < Struct.new(:path)
   Contract Hash => Hash # HashOf[String, Maybe[String]] => Hash[Symbol, Or[String, Bool, Num, nil]]
   # Transforms a hash from raw to saveable
   # @api private
-  # @param [Hash{String=>String,nil}]
+  # @param [Hash{String=>String,nil}] row_hash contains raw-from-csv hash
   # @return [Hash{String=>String,Bool,Num,nil}]
   def transform_hash(row_hash)
     ImportHashAttributeMapper.new(row_hash).mapped_attribute_hash
