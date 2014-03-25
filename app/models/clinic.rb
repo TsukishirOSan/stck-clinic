@@ -33,20 +33,6 @@ class Clinic < ActiveRecord::Base
   has_one :epi_breakdown
   has_many :orders
 
-  after_create :send_notification_email
-
-  private
-  Contract nil => Maybe[Bool]
-  # handle sending notification upon new clinic creation
-  # @api private
-  # @return [true,false] success of sending notification email
-  def send_notification_email
-    if ClinicMailer.new_clinic_email(self).deliver
-      Rails.logger.info("Sent #{Clinic.model_name.human} notification for #{self.id}")
-      true
-    else
-      Rails.logger.info("Couldn't send #{Clinic.model_name.human} notification for #{self.id}")
-      false
-    end
-  end
+  EMAIL_NOTIFICATION_METHOD = :new_clinic_email
+  include EmailNotificationDelivery
 end
