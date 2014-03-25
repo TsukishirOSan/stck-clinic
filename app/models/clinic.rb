@@ -42,10 +42,10 @@ class Clinic < ActiveRecord::Base
   # @return [true,false] success of sending notification email
   def send_notification_email
     if ClinicMailer.new_clinic_email(self).deliver
-      Rails.logger.info("Sent new #{Clinic.model_name.human} notification for #{self.id}")
+      Rails.logger.info("Sent #{Clinic.model_name.human} notification for #{self.id}")
       true
     else
-      Rails.logger.info("Couldn't send new #{Clinic.model_name.human} notification for #{self.id}")
+      Rails.logger.info("Couldn't send #{Clinic.model_name.human} notification for #{self.id}")
       false
     end
   end
