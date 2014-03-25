@@ -21,13 +21,11 @@ describe CsvDataImporter do
 
   describe '#process_row_hash' do
     it 'transforms the row' do
-      pending
       expect(csv_data_importer).to receive(:transform_hash).with(sample_hash).and_call_original
       csv_data_importer.process_row_hash(sample_hash)
     end
 
     it 'delegates to ClinicSignUpInteraction' do
-      pending
       expect(ClinicSignUpInteraction).to receive(:run!)
       csv_data_importer.process_row_hash(sample_hash)
     end

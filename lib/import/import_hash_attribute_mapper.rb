@@ -57,7 +57,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
       'community health center'          => :community_health,
       'family planning clinic'           => :family_planning,
       'planned parenthood health center' => :planned_parenthood,
-      'private practice'                 => :private_practive,
+      'private practice'                 => :private_practice,
       'other'                            => :other
     },
     'How do you deliver chlamydia test results?' => {
@@ -100,7 +100,8 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
   def mapped_direct_attribute_hash
     pairs = DIRECT_ATTRIBUTE_MAP_TABLE.map do |src, dest|
       Rails.logger.info("Mapping directly '#{src}' -> '#{dest}'")
-      [dest, import_hash[src]]
+
+      [dest, import_hash.fetch(src, '').to_s]
     end
 
     Hash[pairs]
@@ -115,7 +116,7 @@ class ImportHashAttributeMapper < Struct.new(:import_hash)
       Rails.logger.info("Mapping numeric '#{src}' -> '#{dest}'")
       [
         dest,
-        value_to_float(import_hash[src])
+        value_to_float(import_hash.fetch(src, 0))
       ]
     end
 

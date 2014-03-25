@@ -47,7 +47,7 @@ describe ImportHashAttributeMapper do
     ImportHashAttributeMapper::DIRECT_ATTRIBUTE_MAP_TABLE.each do |src, dest|
       # both needed to ensure nil values get set explicitly!
       it { should have_key(dest) }
-      it { expect(mapped_attribute_hash[dest]).to eq(import_hash[src]) }
+      it { expect(mapped_attribute_hash[dest]).to eq(import_hash[src].to_s) }
     end
   end
 

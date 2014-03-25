@@ -7,6 +7,7 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
 
   validates :clinic_name, presence: true
   validates :clinic_street_address, presence: true
+  validates :clinic_street_address_continued, presence: false
   validates :clinic_state, presence: true
   validates :clinic_city, presence: true
   validates :clinic_zip, presence: true
