@@ -33,8 +33,14 @@ class MultiValueColumnProcessor < Struct.new(:raw_column_value, :transformation_
   #   multi_value_column_processor.preprocess_column("panda, bamboo, curry")
   # @return [Array<String>] the array of cleaned up string values
   def preprocess_column(raw_column)
-    raw_column.split(',')
-      .map(&:downcase)
-      .map(&:strip)
+    if '-' == raw_column
+      output = []
+    else
+      output = raw_column.split(',')
+        .map(&:downcase)
+        .map(&:strip)
+    end
+
+    output
   end
 end

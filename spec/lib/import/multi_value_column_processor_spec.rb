@@ -22,6 +22,10 @@ describe MultiValueColumnProcessor do
       end
     end
 
+    context 'given "-"' do
+      it { expect(multi_value_column_processor.preprocess_column('-')).to eq([]) }
+    end
+
     context 'values' do
       context 'with mixed-case values' do
         it do
