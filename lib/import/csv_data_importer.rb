@@ -4,6 +4,18 @@
 class CsvDataImporter < Struct.new(:path)
   include Contracts
 
+  Contract nil => Array
+  # Executes the actual import
+  # @api public
+  # @return [Array] results from the ClinicSignUpInteraction executions
+  def import!
+    Rails.logger.tagged('CsvDataImporter') do
+      Rails.logger.info("Importing data from CSV #{path}")
+      row_hashes.each {|row_hash| process_row_hash(row_hash) }
+      Rails.logger.info("Finished importing data from CSV #{path}")
+    end
+  end
+
   Contract nil => ArrayOf[Hash]
   # Returns the CSV's row data as hashes
   # @api private
@@ -19,7 +31,7 @@ class CsvDataImporter < Struct.new(:path)
   #   in by CSV data source
   def process_row_hash(row_hash)
     row_attributes = transform_hash(row_hash)
-
+    Rails.logger.info("Processing row hash for #{row_hash.object_id}")
     ClinicSignUpInteraction.run!(row_attributes)
   end
 
@@ -29,6 +41,7 @@ class CsvDataImporter < Struct.new(:path)
   # @param [Hash{String=>String,nil}] row_hash contains raw-from-csv hash
   # @return [Hash{String=>String,Bool,Num,nil}]
   def transform_hash(row_hash)
+    Rails.logger.info("")
     ImportHashAttributeMapper.new(row_hash).mapped_attribute_hash
   end
 end
