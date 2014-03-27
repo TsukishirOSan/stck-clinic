@@ -28,6 +28,6 @@ class EpiBreakdown < ActiveRecord::Base
    :test_gc,    :diag_gc,
    :test_trich, :diag_trich,
    :test_hiv,   :diag_hiv].each do |column_name|
-    validates column_name, numericality: true, allow_nil: true
+    validates column_name, numericality: true, allow_blank: true
   end
 end

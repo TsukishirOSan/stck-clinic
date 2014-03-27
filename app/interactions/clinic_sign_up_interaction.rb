@@ -34,18 +34,18 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
           :deliver_results_on_phone_automated,
           :deliver_results_other
 
-  include EnsureOneService
-
   float :population_women,
         :population_msm,
         :population_under_26,
         :population_hispanic,
-        :population_black
+        :population_black,
+        default: nil
 
   float :test_ct,    :diag_ct,
         :test_gc,    :diag_gc,
         :test_trich, :diag_trich,
-        :test_hiv,   :diag_hiv
+        :test_hiv,   :diag_hiv,
+        default: nil
 
   Contract nil => Clinic
   # Required method called by `run` to actually do this interaction

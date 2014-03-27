@@ -65,40 +65,11 @@ describe ClinicSignUpInteraction do
   it { should validate_presence_of(:contact_name) }
   it { should validate_presence_of(:contact_phone) }
   it { should validate_presence_of(:contact_email) }
-  # service offering info
-  #########################################################
-  # it { should validate_presence_of(:college_health) }   #
-  # it { should validate_presence_of(:community_health) } #
-  # it { should validate_presence_of(:family_planning) }  #
-  # it { should validate_presence_of(:private_practice) } #
-  # it { should validate_presence_of(:std) }              #
-  # it { should validate_presence_of(:other) }            #
-  #########################################################
 
   describe '#valid?' do
     context 'given valid attributes' do
       it 'validates' do
         expect(clinic_sign_up_interaction).to be_valid
-      end
-    end
-
-    context 'given invalid attributes' do
-      context 'given no services selected' do
-        it 'fails validation' do
-          [
-            :college_health,
-            :community_health,
-            :family_planning,
-            :other,
-            :planned_parenthood,
-            :private_practice,
-            :std,
-          ].each do |attr|
-            service_offering_description.public_send("#{attr}=", false)
-          end
-
-          expect(clinic_sign_up_interaction).not_to be_valid
-        end
       end
     end
   end
