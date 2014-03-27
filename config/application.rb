@@ -28,9 +28,8 @@ module StckClinic
     # extra autoloads
     #config.autoload_paths += Dir[Rails.root.join('lib', '{**/}')]
     #    require_dependency(Rails.root.join('lib', 'import', '*.rb').to_s)
-    Dir[Rails.root.join('lib', 'import', '*.rb')].each do |pathname|
-      require_dependency(pathname)
-    end
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
     config.i18n.enforce_available_locales = true
   end
 end
