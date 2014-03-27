@@ -25,15 +25,15 @@ class MultiValueColumnProcessor < Struct.new(:raw_column_value, :transformation_
     end.reduce(&:merge)
   end
 
-  Contract String => ArrayOf[String]
+  Contract Maybe[String] => ArrayOf[String]
   # splits column on comma character and cleans up values
-  # @param [String] raw_column the raw column
+  # @param [String,nil] raw_column the raw column
   # @api public
   # @example
   #   multi_value_column_processor.preprocess_column("panda, bamboo, curry")
   # @return [Array<String>] the array of cleaned up string values
   def preprocess_column(raw_column)
-    if '-' == raw_column
+    if '-' == raw_column || raw_column.nil?
       output = []
     else
       output = raw_column.split(',')

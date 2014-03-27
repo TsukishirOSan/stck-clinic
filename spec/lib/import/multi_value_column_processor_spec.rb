@@ -39,6 +39,18 @@ describe MultiValueColumnProcessor do
         end
       end
     end
+
+    context 'given no value' do
+      context 'nil' do
+        subject { multi_value_column_processor.preprocess_column(nil) }
+        it { should eq([]) }
+      end
+
+      context 'blank' do
+        subject { multi_value_column_processor.preprocess_column('') }
+        it { should eq([]) }
+      end
+    end
   end
 
   describe '#values_hash' do
