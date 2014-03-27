@@ -25,6 +25,6 @@ class PopulationBreakdown < ActiveRecord::Base
   validates :clinic, presence: true
 
   [:women, :msm, :under_26, :black, :hispanic].each do |column_name|
-    validates column_name, presence: true, numericality: true
+    validates column_name, presence: true, numericality: true, allow_nil: true
   end
 end

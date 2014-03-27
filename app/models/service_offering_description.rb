@@ -34,7 +34,7 @@ class ServiceOfferingDescription < ActiveRecord::Base
   validates :name, presence: true
   validates :clinic, presence: true
 
-  include EnsureOneService
+  #include EnsureOneService
 
   # options for CT charge type
   # @return [Array<String>]

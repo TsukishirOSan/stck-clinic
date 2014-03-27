@@ -31,7 +31,7 @@ class CsvDataImporter < Struct.new(:path)
   #   in by CSV data source
   def process_row_hash(row_hash)
     row_attributes = transform_hash(row_hash)
-    Rails.logger.info("Processing row hash for #{row_hash.object_id}")
+    Rails.logger.info("Processing row hash for #{row_attributes[:clinic_name]}")
     ClinicSignUpInteraction.run!(row_attributes)
   end
 
