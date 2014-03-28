@@ -73,7 +73,7 @@ describe MultiValueColumnProcessor do
         expect do
           missing_column_data = "Panda, Missing (should fail terribly)"
           MultiValueColumnProcessor.new(missing_column_data, test_transformation_map).values_hash
-        end.to raise_error(RuntimeError, "Don't know how to map value missing (should fail terribly)!")
+        end.to raise_error(RuntimeError)
       end
     end
   end
