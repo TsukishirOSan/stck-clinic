@@ -27,11 +27,11 @@ class Clinic < ActiveRecord::Base
   validates :street_address, presence: true
   validates :zip, presence: true
 
-  has_one :contact
-  has_one :population_breakdown
-  has_one :service_offering_description
-  has_one :epi_breakdown
-  has_many :orders
+  has_one :contact, dependent: :destroy
+  has_one :population_breakdown, dependent: :destroy
+  has_one :service_offering_description, dependent: :destroy
+  has_one :epi_breakdown, dependent: :destroy
+  has_many :orders, dependent: :destroy
 
   EMAIL_NOTIFICATION_METHOD = :new_clinic_email
   include EmailNotificationDelivery
