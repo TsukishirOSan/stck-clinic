@@ -14,7 +14,7 @@ class MultiValueColumnProcessor < Struct.new(:raw_column_value, :transformation_
 
     # checking to make sure we know how to map everything
     column_values.each do |column_value|
-      fail "Don't know how to map value #{column_value}!" unless transformation_map.has_key?(column_value)
+      fail "Don't know how to map value #{Rainbow(column_value).red}!" unless transformation_map.has_key?(column_value)
     end
 
     # actually do the mapping
