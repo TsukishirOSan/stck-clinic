@@ -5,12 +5,16 @@ module EmailNotificationDelivery
 
   included do
     after_create do |model|
-      if ClinicMailer.public_send(model.class::EMAIL_NOTIFICATION_METHOD, model).deliver
-        Rails.logger.info("Sent #{model.class.model_name.human} notification for #{model.id}")
-        true
+      if ENV['SUSPEND_EMAIL'].present?
+        Rails.logger.info("Not sending #{model.class.model_name.human} notification for #{model.id} because SUSPEND_EMAIL=#{ENV['SUSPEND_EMAIL']}")
       else
-        Rails.logger.info("Couldn't send #{model.class.model_name.human} notification for #{model.id}")
-        false
+        if ClinicMailer.public_send(model.class::EMAIL_NOTIFICATION_METHOD, model).deliver
+          Rails.logger.info("Sent #{model.class.model_name.human} notification for #{model.id}")
+          true
+        else
+          Rails.logger.info("Couldn't send #{model.class.model_name.human} notification for #{model.id}")
+          false
+        end
       end
     end
   end
