@@ -16,6 +16,7 @@ describe ClinicSignUpInteraction do
       :clinic_street_address              => clinic.street_address,
       :clinic_street_address_continued    => clinic.street_address_continued,
       :clinic_zip                         => clinic.zip,
+      :clinic_notes                       => clinic.notes,
       # contact info
       :contact_email                      => contact.email,
       :contact_name                       => contact.name,
@@ -50,7 +51,7 @@ describe ClinicSignUpInteraction do
       :test_trich                         => epi_breakdown.test_trich,
       :diag_trich                         => epi_breakdown.diag_trich,
       :test_hiv                           => epi_breakdown.test_hiv,
-      :diag_hiv                           => epi_breakdown.diag_hiv,
+      :diag_hiv                           => epi_breakdown.diag_hiv
     }
   end
 

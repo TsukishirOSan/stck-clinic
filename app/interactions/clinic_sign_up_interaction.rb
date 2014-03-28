@@ -5,6 +5,8 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
   string :clinic_name, :clinic_street_address, :clinic_street_address_continued,
          :clinic_city, :clinic_state, :clinic_zip
 
+  string :clinic_notes, default: nil
+
   validates :clinic_name, presence: true
   validates :clinic_street_address, presence: true
   validates :clinic_street_address_continued, presence: false
@@ -136,7 +138,8 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
                       :clinic_state                    => :state,
                       :clinic_street_address           => :street_address,
                       :clinic_street_address_continued => :street_address_continued,
-                      :clinic_zip                      => :zip)
+                      :clinic_zip                      => :zip,
+                      :clinic_notes                    => :notes)
 
     Rails.logger.info("Attempting to create #{Clinic.model_name.human}")
     Clinic.create!(attrs)
