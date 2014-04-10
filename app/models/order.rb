@@ -29,7 +29,7 @@ class Order < ActiveRecord::Base
 
   validates :card_quantity, presence: true, numericality: true
   validates :brochure_quantity, presence: true, numericality: true
-  validates :clinic_code, uniqueness: {scope: :clinic}, format: { with: /\A[a-zA-Z]{1}\d{2}\z/ }, allow_nil: true
+  validates :clinic_code, uniqueness: {scope: :clinic}, format: { with: /\A[a-zA-Z]{1}\d{2,}\z/ }, allow_nil: true
 
   # @return [Array<String>]
   TYPE_OPTIONS = [ 'Mixed', 'All Color', 'All BW' ]

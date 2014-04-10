@@ -34,10 +34,8 @@ FactoryGirl.define do
     sent_on { nil } #5.days.ago }
     sequence(:brochure_quantity) {|n| n}
     sequence(:card_quantity) {|n| n }
-    sequence(:clinic_code) {|n| "#{('A'..'Z').to_a[(n/4).ceil]}#{n*10}"[0..2] }
+    sequence(:clinic_code) {|n| "Q#{n*10}" }
     status { Order::STATUS_OPTIONS.first }
     use { Order::USE_OPTIONS.first }
-
-
   end
 end
