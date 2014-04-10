@@ -22,4 +22,18 @@ describe OrderCsvImporter do
       }.to change(Order, :count).by(1)
     end
   end
+
+  describe '#vtf' do
+    context 'given a monetary amount' do
+      it { expect(order_csv_importer.vtf('$1.11')).to eq(1.11) }
+    end
+
+    context 'given an empty string' do
+      it { expect(order_csv_importer.vtf('')).to eq(nil) }
+    end
+
+    context 'given nil' do
+      it { expect(order_csv_importer.vtf(nil)).to eq(nil) }
+    end
+  end
 end
