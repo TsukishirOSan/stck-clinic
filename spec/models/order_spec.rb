@@ -32,6 +32,7 @@ describe Order do
   it { should validate_presence_of(:brochure_quantity) }
   it { should validate_numericality_of(:card_quantity) }
   it { should validate_numericality_of(:brochure_quantity) }
+  it { should validate_uniqueness_of(:clinic_code) }
 
   it { should ensure_inclusion_of(:use).in_array(Order::USE_OPTIONS) }
   it { should ensure_inclusion_of(:order_type).in_array(Order::TYPE_OPTIONS) }
@@ -40,6 +41,13 @@ describe Order do
   describe '#valid?' do
     context 'given valid attributes' do
       it { expect(order).to be_valid }
+    end
+
+    context 'given invalid attributes' do
+      context 'clinic code format' do
+        subject { order.clinic_code = 'INVALID'; order }
+        it { should_not be_valid }
+      end
     end
   end
 

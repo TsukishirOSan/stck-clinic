@@ -29,6 +29,7 @@ class Order < ActiveRecord::Base
 
   validates :card_quantity, presence: true, numericality: true
   validates :brochure_quantity, presence: true, numericality: true
+  validates :clinic_code, uniqueness: {scope: :clinic}, format: { with: /\A[a-zA-Z]{1}\d{2}\z/ }, allow_nil: true
 
   # @return [Array<String>]
   TYPE_OPTIONS = [ 'Mixed', 'All Color', 'All BW' ]
@@ -44,7 +45,9 @@ class Order < ActiveRecord::Base
 
   before_validation :maybe_set_name, on: :create
   before_validation :set_status_if_sent#, on: :save
-  after_create :send_notification_email
+
+  EMAIL_NOTIFICATION_METHOD = :new_order_email
+  include EmailNotificationDelivery
 
   Contract nil => ArrayOf[String]
   # RailsAdmin enum functionality
@@ -95,20 +98,5 @@ class Order < ActiveRecord::Base
     end
 
     self.status
-  end
-
-  Contract nil => Maybe[Bool]
-  # send notification email after create
-  # @api private
-  # @return [Bool,nil]
-  def send_notification_email
-    if ClinicMailer.new_order_email(self).deliver
-      Rails.logger.info("Sent #{Order.model_name.human} notification for #{self.id}")
-      true
-    else
-      Rails.logger.info("Couldn't send #{Order.model_name.human} notification for #{self.id}")
-      false
-    end
-
   end
 end
