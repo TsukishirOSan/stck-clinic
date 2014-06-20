@@ -15,11 +15,11 @@ This should help you get up and running to develop on this project:
 
 ### Requirements ###
 * [PostgreSQL](http://www.postgresql.org/)
-* http://ruby-lang.org 2.0.0 / 2.1.0 (ideally [RVM](http://rvm.io))
+* http://ruby-lang.org 2.1.2 (ideally [RVM](http://rvm.io))
 * Git
 
 ### Installation ###
-1. Install rvm and ruby 2.1.0
+1. Install rvm and ruby 2.1.2
 1. Install PostgreSQL
 1. Check out git repo locally
 1. `bundle install`
