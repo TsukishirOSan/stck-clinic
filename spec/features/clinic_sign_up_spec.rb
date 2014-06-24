@@ -16,18 +16,22 @@ describe 'Clinic sign up', type: :feature do
         within('.clinic_sign_up_interaction_clinic_street_address') do
           fill_in 'Clinic street address', :with => clinic.street_address
         end
+        fill_in 'Clinic city', :with => clinic.city
+        fill_in 'Clinic state', :with => clinic.state
+        fill_in 'Clinic zip', :with => clinic.zip
+        fill_in 'Contact name', :with => contact.name
+        fill_in 'Contact phone', :with => contact.phone
+        fill_in 'Contact email', :with => contact.email
       end
 
       it 'submits successfully' do
-        pending "no idea how this works"
         click_on 'Create Clinic'
         expect(page.status_code).to eq(200)
       end
 
-      it 'creates a clinic' do
-        pending "unspecified behavior"
+      xit 'creates a clinic' do
         expect {
-          click_on 'Create Clinic'
+          click_on 'Create Clinic sign up interaction'
         }.to change(Clinic, :count).by(1)
       end
     end

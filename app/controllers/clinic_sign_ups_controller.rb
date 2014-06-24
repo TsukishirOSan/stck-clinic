@@ -18,6 +18,6 @@ class ClinicSignUpsController < ApplicationController
 
   private
   def clinic_sign_up_interaction_params
-    params.require(:clinic_sign_up_interaction).permit(:clinic_name)
+    params.require(:clinic_sign_up_interaction).permit(:clinic_name, :clinic_street_address, :clinic_street_address_continued, :clinic_city, :clinic_state, :clinic_zip, :contact_name, :contact_title, :contact_phone, :contact_email, :college_health, :community_health, :family_planning, :other, :planned_parenthood, :private_practice, :std)
   end
 end

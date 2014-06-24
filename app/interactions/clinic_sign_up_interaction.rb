@@ -9,7 +9,6 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
 
   validates :clinic_name, presence: true
   validates :clinic_street_address, presence: true
-  validates :clinic_street_address_continued, presence: false
   validates :clinic_state, presence: true
   validates :clinic_city, presence: true
   validates :clinic_zip, presence: true
@@ -28,13 +27,14 @@ class ClinicSignUpInteraction < ActiveInteraction::Base
           :private_practice,
           :std
 
-  string :charge_ct, :notify_test_ready
+  string :charge_ct, :notify_test_ready, default: nil 
 
   boolean :deliver_results_online,
           :deliver_results_in_person,
           :deliver_results_on_phone_human,
           :deliver_results_on_phone_automated,
-          :deliver_results_other
+          :deliver_results_other,
+          default: nil
 
   float :population_women,
         :population_msm,

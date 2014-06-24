@@ -2,6 +2,7 @@
 <%= f.input :clinic_name %>
 <%= f.input :clinic_street_address %>
 <%= f.input :clinic_street_address_continued %>
+<%= f.input :clinic_city %>
 <%= f.input :clinic_state %>
 <%= f.input :clinic_zip %>
 
@@ -11,7 +12,7 @@
 <%= f.input :contact_phone %>
 <%= f.input :contact_email %>
 
-<h3>Contact Population Characteristics</h3>
+<h3><%= Clinic.model_name.human %> Population Characteristics</h3>
 <% [:college_health, :community_health, :family_planning, :other, :planned_parenthood, :private_practice, :std].each do |attr| %>
   <%= f.input attr, as: :boolean %>
 <% end  %>
