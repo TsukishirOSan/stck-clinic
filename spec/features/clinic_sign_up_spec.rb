@@ -12,12 +12,14 @@ describe 'Clinic sign up', type: :feature do
 
     context 'given required information' do
       before(:each) do
-        pending
         fill_in 'Clinic name', :with => clinic.name
+        within('.clinic_sign_up_interaction_clinic_street_address') do
+          fill_in 'Clinic street address', :with => clinic.street_address
+        end
       end
 
       it 'submits successfully' do
-        pending "unspecified behavior"
+        pending "no idea how this works"
         click_on 'Create Clinic'
         expect(page.status_code).to eq(200)
       end
