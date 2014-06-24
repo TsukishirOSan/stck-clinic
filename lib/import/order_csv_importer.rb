@@ -42,8 +42,8 @@ class OrderCsvImporter < Struct.new(:path)
       :card_quantity => row_attributes.fetch('Card Quantity'),
       :brochure_quantity => row_attributes.fetch('Brochure quantity'),
       :sent_on => Date.strptime(row_attributes.fetch('Sent on'), '%m/%d/%Y'),
-      :envelope_cost => vtf(row_attributes.fetch('Envelope cost')),
-      :postage_cost => vtf(row_attributes.fetch('Postage cost')),
+      :envelope_cost => value_to_float(row_attributes.fetch('Envelope cost')),
+      :postage_cost => value_to_float(row_attributes.fetch('Postage cost')),
       :use => row_attributes.fetch('Use'),
       :order_type => row_attributes.fetch('Order type'),
       :notes => row_attributes.fetch('Notes'),
@@ -52,7 +52,13 @@ class OrderCsvImporter < Struct.new(:path)
   end
 
   Contract Maybe[String] => Maybe[Float]
-  def vtf(value)
+  # Converts monetary value from spreadsheet, handles nil, emptry
+  # string and leading $
+  #
+  # @api private
+  # @param value [String,nil] the value from the spreadsheet
+  # @return [Float,nil] the converted Float (or not, whatever)
+  def value_to_float(value)
     if value.blank?
       output = nil
     else

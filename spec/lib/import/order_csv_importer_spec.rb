@@ -23,17 +23,17 @@ describe OrderCsvImporter do
     end
   end
 
-  describe '#vtf' do
+  describe '#value_to_float' do
     context 'given a monetary amount' do
-      it { expect(order_csv_importer.vtf('$1.11')).to eq(1.11) }
+      it { expect(order_csv_importer.value_to_float('$1.11')).to eq(1.11) }
     end
 
     context 'given an empty string' do
-      it { expect(order_csv_importer.vtf('')).to eq(nil) }
+      it { expect(order_csv_importer.value_to_float('')).to eq(nil) }
     end
 
     context 'given nil' do
-      it { expect(order_csv_importer.vtf(nil)).to eq(nil) }
+      it { expect(order_csv_importer.value_to_float(nil)).to eq(nil) }
     end
   end
 end
